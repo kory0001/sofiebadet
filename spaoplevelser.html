@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaoplevelser - Sofiebadet</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- STATISK HERO - ALTID DEN SAMME -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero__title font-editorial">Oplevbadet</h1>
+            <h2 class="hero__subtitle font-editorial-light">Spaoplevelser & behandlinger</h2>
+            <p class="hero__text font-hedvig">
+                Hos Sofiebadet bygger hver behandling på vores gamle hus' tradition for ro, sundhed og nærvær. Her går
+                varme, vand og naturlige produkter hånd i hånd med erfarne behandleres faglighed, så du kan give slip og
+                lade kroppen falde til ro. Hver oplevelse er skabt med omhu fra det bløde sæbeskum og beroligende dufte
+                til det kolde gys efter en tur i saunaen. Uanset om du vælger hammam, kurbad, massage eller
+                ansigtsbehandling, trækker du ind i et rum, hvor tiden går lidt langsommere.
+            </p>
+        </div>
+    </section>
+
+    <!-- FILTER SEKTION -->
+    <section class="filter">
+        <div class="container">
+            <div class="filter__bar">
+                <div class="filter__label font-hedvig">
+                    <svg class="filter__icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 4h18M3 12h12M3 20h6" />
+                    </svg>
+                    <span>Hvad søger du i dag?</span>
+                </div>
+                <div id="filterButtons" class="filter__buttons"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMISK KATEGORI HEADER (kun synlig når filter er aktiv) -->
+    <header id="categoryHeader" class="category-header" style="display: none;">
+        <div class="container">
+            <h2 id="categoryTitle" class="category-header__title font-editorial">category title</h2>
+            <p id="categorySubtitle" class="category-header__subtitle font-editorial-light-italic"></p>
+        </div>
+    </header>
+
+    <!-- LISTE AF BEHANDLINGSCARDS -->
+    <section class="treatment-list">
+        <div id="behandlingerContainer" class="container treatment-list__container">
+            <!-- Dynamisk indhold -->
+        </div>
+    </section>
+
+    <script src="js/config.js"></script>
+    <script src="js/spaoplevelser.js"></script>
+</body>
+
+</html>

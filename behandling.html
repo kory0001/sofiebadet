@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Behandling</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="behandling-hero">
+        <div class="container behandling-hero__container">
+            <h1 id="heroTitle" class="behandling-hero__title font-editorial">titel</h1>
+            <p id="sektionstitel" class="behandling-hero__subtitle font-editorial-italic"></p>
+            <p id="introText" class="behandling-hero__intro font-editorial-italic"></p>
+        </div>
+    </section>
+
+    <!-- CONTENT LAYOUT -->
+    <section class="behandling">
+        <div class="container behandling__container">
+
+            <!-- VENSTRE SIDEBAR -->
+            <aside class="behandling-info">
+
+                <!-- KUNDEFAVORIT BADGE -->
+                <div id="kundefavoritBadge" class="behandling-info__badge" style="display:none;">
+                    ⭐ Kundefavorit
+                </div>
+
+                <!-- VARIGHED OG PERSONER -->
+                <div class="behandling-info__block">
+                    <h3 class="behandling-info__heading font-editorial">Varighed</h3>
+                    <p id="varighed" class="behandling-info__text font-hedvig"></p>
+
+                    <h3 class="behandling-info__heading font-editorial">Personer</h3>
+                    <p id="personer" class="behandling-info__text font-hedvig"></p>
+                </div>
+
+                <!-- INKLUDERET -->
+                <div class="behandling-info__block">
+                    <h3 class="behandling-info__heading font-editorial">Inkluderet i din oplevelse</h3>
+                    <ul id="inkluderetListe" class="behandling-info__list font-hedvig"></ul>
+                </div>
+
+                <!-- PRAKTISK -->
+                <div class="behandling-info__block">
+                    <h3 class="behandling-info__heading font-editorial">Praktisk</h3>
+                    <ul id="praktiskListe" class="behandling-info__list font-hedvig"></ul>
+                </div>
+
+                <!-- PRIS -->
+                <div class="behandling-info__block">
+                    <span id="prisOriginal" class="behandling-info__price--old font-hedvig"
+                        style="display:none;"></span>
+                    <p id="prisAktuel" class="behandling-info__price font-editorial-italic"></p>
+                </div>
+
+                <!-- CTA-KNAPPER -->
+                <button class="behandling-info__cta font-buvera">Book tid →</button>
+                <button class="behandling-info__cta behandling-info__cta--secondary font-buvera">Bestil gavekort
+                    →</button>
+
+            </aside>
+
+            <!-- HØJRE BESKRIVELSE -->
+            <article id="beskrivelse" class="behandling-description font-hedvig">
+                <!-- Afsnit indsættes dynamisk via behandling.js -->
+            </article>
+
+        </div>
+    </section>
+
+    <script src="js/config.js"></script>
+    <script src="js/behandling.js"></script>
+</body>
+
+</html>
