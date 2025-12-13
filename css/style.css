@@ -80,8 +80,8 @@
   --spacing-lg: 32px;
   --spacing-xl: 48px;
   --spacing-2xl: 64px;
-  --spacing-3xl: 80px;
-  --spacing-4xl: 120px;
+  --spacing-3xl: 120px;
+  --spacing-4xl: 150px;
   --spacing-5xl: 200px;
 
   /* BORDER RADIUS */
@@ -419,36 +419,23 @@ button:disabled {
 
 .behandling-hero__title {
   font-size: var(--text-7xl);
-  color: var(--mahogany);
   margin-bottom: var(--spacing-sm);
   text-transform: initial;
   line-height: 1.1;
 }
 
-.behandling-hero__subtitle {
-  font-size: var(--text-xl);
-  color: var(--mahogany);
-  margin-bottom: var(--spacing-xs);
-  line-height: 1.4;
-}
-
 .behandling-hero__intro {
   font-size: var(--text-2xl);
-  color: var(--mahogany);
+  margin-bottom: var(--spacing-4xl);
 }
 
 /* ======================
    BEHANDLING CONTENT
    ====================== */
 
-/* .behandling {
-  background-color: var(--breeze);
-  padding: 0 0 var(--spacing-5xl);
-} */
-
 .behandling__container {
   display: grid;
-  grid-template-columns: 450px 1fr;
+  grid-template-columns: 0.7fr 1fr;
   gap: var(--spacing-3xl);
   align-items: start;
   margin: 0 auto;
@@ -481,13 +468,14 @@ button:disabled {
 }
 
 .behandling-info__block {
-  padding-bottom: var(--spacing-3xl);
+  padding-bottom: var(--spacing-2xl);
 }
 
 .behandling-info__block:last-of-type {
-  border-bottom: none;
-  margin-bottom: var(--spacing-lg);
+  padding-bottom: 0;
 }
+
+
 
 .behandling-info__heading {
   font-size: var(--text-lg);
@@ -500,50 +488,75 @@ button:disabled {
 }
 
 .behandling-info__text {
-  font-size: var(--text-base);
+  font-size: var(--text-xs);
   color: var(--mahogany);
-  line-height: 1.6;
+  line-height: 2;
   margin-bottom: var(--spacing-sm);
 }
 
 .behandling-info__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  margin-left: var(--spacing-xl);
 }
 
 .behandling-info__list li {
-  padding-left: var(--spacing-md);
   margin-bottom: var(--spacing-sm);
-  position: relative;
   font-size: var(--text-base);
-  line-height: 1.6;
-  color: var(--mahogany);
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.behandling-info__list li svg {
+  flex-shrink: 0;
+}
+
+.behandling-info__list li span {
+  flex: 1;
 }
 
 .behandling-info__price--old {
-  font-size: var(--text-xl);
-  color: var(--mahogany);
+  font-size: var(--text-5xl);
   opacity: 0.5;
   text-decoration: line-through;
-  display: block;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
 }
 
 .behandling-info__price {
   font-size: var(--text-5xl);
   color: var(--mahogany);
-  margin-bottom: var(--spacing-lg);
-  display: block;
   line-height: 1.2;
 }
 
+/* ======================
+   CTA BUTTONS CONTAINER
+   ====================== */
+
+.behandling-cta-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.behandling-cta-buttons .behandling-info__cta {
+  margin-bottom: 0; /
+}
+
+/* Responsive - stabler på mobil */
+@media (max-width: 768px) {
+  .behandling-cta-buttons {
+    flex-direction: column;
+  }
+
+  .behandling-cta-buttons .behandling-info__cta {
+    width: 100%;
+  }
+}
+
 .behandling-info__cta {
-  width: 100%;
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--radius-md);
   font-size: var(--text-base);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: all var(--transition-base);
@@ -583,9 +596,8 @@ button:disabled {
    ====================== */
 
 .behandling-description {
-  font-size: var(--text-base);
-  line-height: 1.7;
-  color: var(--mahogany);
+  max-width: 65ch;
+  line-height: 35px;
 }
 
 .behandling-description p {
@@ -593,7 +605,7 @@ button:disabled {
 }
 
 .behandling-description p:last-child {
-  margin-bottom: 0;
+  margin-bottom: var(--spacing-3xl);
 }
 
 /* ======================

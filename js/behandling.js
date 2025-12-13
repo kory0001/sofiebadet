@@ -52,37 +52,43 @@ async function renderBehandling() {
     // VARIGHED - Titel og liste
     document.getElementById("varighedTitel").textContent = `${behandling.varighed}:`;
 
-    // Varighed beskrivelse (de 2-3 bullet points)
+    // Varighed beskrivelse
     if (behandling.varighed_beskrivelse && behandling.varighed_beskrivelse.length > 0) {
       const varighedHTML = behandling.varighed_beskrivelse
         .map(
-          (item) => `<li><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
-  <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
-</svg>${item}</li>`
+          (item) => `<li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
+          <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
+        </svg>
+        <span>${item}</span>
+      </li>`
         )
         .join("");
       document.getElementById("varighedListe").innerHTML = varighedHTML;
-    } else {
-      // Fallback hvis varighed_beskrivelse ikke findes
-      document.getElementById("varighedListe").innerHTML = `<li>${behandling.varighed}</li>`;
     }
 
-    // INKLUDERET liste
+    // Inkluderet liste
     const inkluderetHTML = behandling.inkluderet
       .map(
-        (item) => `<li><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
-  <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
-</svg>${item}</li>`
+        (item) => `<li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
+        <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
+      </svg>
+      <span>${item}</span>
+    </li>`
       )
       .join("");
     document.getElementById("inkluderetListe").innerHTML = inkluderetHTML;
 
-    // PRAKTISK liste
+    // Praktisk liste
     const praktiskHTML = behandling.praktisk
       .map(
-        (item) => `<li><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
-  <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
-</svg>${item}</li>`
+        (item) => `<li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
+        <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
+      </svg>
+      <span>${item}</span>
+    </li>`
       )
       .join("");
     document.getElementById("praktiskListe").innerHTML = praktiskHTML;
