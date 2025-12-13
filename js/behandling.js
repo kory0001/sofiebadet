@@ -21,100 +21,144 @@ async function getBehandling(slug) {
 }
 
 // ==========================================
+// FETCH RELATED BEHANDLINGER (FLERE END 3)
+// ==========================================
+async function getRelatedBehandlinger(currentSlug) {
+  const response = await fetch(`${API_BASE}/behandlinger?slug=neq.${currentSlug}&limit=10`, {
+    method: "GET",
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+
+  return await response.json();
+}
+
+// ==========================================
+// SHUFFLE ARRAY (RANDOM)
+// ==========================================
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+// ==========================================
+// RENDER RELATED BEHANDLINGER
+// ==========================================
+function renderRelatedBehandlinger(behandlinger) {
+  const container = document.getElementById("relatedContainer");
+
+  if (!container || !behandlinger || behandlinger.length === 0) return;
+
+  container.innerHTML = behandlinger
+    .map(
+      (b) => `
+      <div class="related__card">
+        <h4 class="related__card--title font-buvera">${b.navn}</h4>
+
+        <p class="related__card--text">
+          ${b.kort_beskrivelse || ""}
+        </p>
+
+        <p class="related__card--meta">
+          ${b.varighed} • ${b.pris},- pr. person
+        </p>
+
+        <a href="behandling.html?slug=${b.slug}" class="button button--secondary button--small">
+          Book tid
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none">
+            <path
+              d="M16.1379 13.4416H0V11.5584H16.1379C18.3024 11.5584 19.4483 12.1753 21.3263 12.1753V12.0779C17.634 10.3896 16.2653 8.50649 15.0239 6.55844L16.8382 5C18.6525 8.40909 20.5623 10.3247 24 11.9156V13.0519C20.5623 14.6429 18.6525 16.5909 16.8382 20L15.0239 18.4091C16.2653 16.4935 17.634 14.6104 21.3263 12.9221V12.8247C19.4483 12.8247 18.2706 13.4416 16.1379 13.4416Z"
+              fill="#321600" />
+          </svg>
+        </a>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// ==========================================
 // RENDER BEHANDLING DETAIL
 // ==========================================
 async function renderBehandling() {
   try {
     const behandling = await getBehandling(slug);
 
-    // Hvis ikke fundet
-    if (!behandling) {
-      document.body.innerHTML = `
-        <div style="padding: var(--spacing-5xl); text-align: center; background-color: var(--breeze); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-          <h1 class="font-editorial" style="font-size: var(--text-6xl); margin-bottom: var(--spacing-md);">Behandling ikke fundet</h1>
-          <a href="spaoplevelser.html" class="font-hedvig" style="color: var(--terracotta); font-size: var(--text-xl);">← Tilbage til oversigt</a>
-        </div>
-      `;
-      return;
-    }
+    if (!behandling) return;
 
-    // === HERO ===
+    // HERO
     document.getElementById("heroTitle").textContent = behandling.navn;
     document.getElementById("introText").textContent = behandling.kort_intro_tekst || "";
 
-    // === SIDEBAR ===
-
-    // Kundefavorit badge
+    // Kundefavorit
     if (behandling.kundefavorit) {
       document.getElementById("kundefavoritBadge").style.display = "flex";
     }
 
-    // VARIGHED - Titel og liste
+    // VARIGHED
     document.getElementById("varighedTitel").textContent = `${behandling.varighed}:`;
 
-    // Varighed beskrivelse
-    if (behandling.varighed_beskrivelse && behandling.varighed_beskrivelse.length > 0) {
-      const varighedHTML = behandling.varighed_beskrivelse
+    if (behandling.varighed_beskrivelse?.length) {
+      document.getElementById("varighedListe").innerHTML = behandling.varighed_beskrivelse
         .map(
           (item) => `<li>
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
-          <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
-        </svg>
-        <span>${item}</span>
-      </li>`
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
+                <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
+              </svg>
+              <span>${item}</span>
+            </li>`
         )
         .join("");
-      document.getElementById("varighedListe").innerHTML = varighedHTML;
     }
 
-    // Inkluderet liste
-    const inkluderetHTML = behandling.inkluderet
+    // INKLUDERET
+    document.getElementById("inkluderetListe").innerHTML = behandling.inkluderet
       .map(
         (item) => `<li>
-      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
-        <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
-      </svg>
-      <span>${item}</span>
-    </li>`
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
+              <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
+            </svg>
+            <span>${item}</span>
+          </li>`
       )
       .join("");
-    document.getElementById("inkluderetListe").innerHTML = inkluderetHTML;
 
-    // Praktisk liste
-    const praktiskHTML = behandling.praktisk
+    // PRAKTISK
+    document.getElementById("praktiskListe").innerHTML = behandling.praktisk
       .map(
         (item) => `<li>
-      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
-        <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
-      </svg>
-      <span>${item}</span>
-    </li>`
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none">
+              <path d="M0 1.51402C1.34146 3.8271 3.08943 6.26635 7.11382 8.45327V9.54673C3.08943 11.7336 1.34146 14.1729 0 16.4439L1.58536 18C3.57724 14.2991 5.93496 11.5654 10 9.50467V8.45327C5.93496 6.39252 3.57724 3.70093 1.58536 0L0 1.51402Z" fill="#321600"/>
+            </svg>
+            <span>${item}</span>
+          </li>`
       )
       .join("");
-    document.getElementById("praktiskListe").innerHTML = praktiskHTML;
 
     // PRIS
     if (behandling.pris_original) {
       document.getElementById("prisOriginal").textContent = `${behandling.pris_original},- pr. person`;
       document.getElementById("prisOriginal").style.display = "block";
     }
+
     document.getElementById("prisAktuel").textContent = `${behandling.pris},- pr. person`;
 
-    // === BESKRIVELSE ===
-    const beskrivelseHTML = behandling.lang_beskrivelse
+    // BESKRIVELSE
+    document.getElementById("beskrivelse").innerHTML = behandling.lang_beskrivelse
       .split("\n\n")
-      .map((afsnit) => `<p>${afsnit}</p>`)
+      .map((p) => `<p>${p}</p>`)
       .join("");
-    document.getElementById("beskrivelse").innerHTML = beskrivelseHTML;
+
+    // ==========================================
+    // RELATED (RANDOM)
+    // ==========================================
+    const related = await getRelatedBehandlinger(behandling.slug);
+    const randomRelated = shuffleArray(related).slice(0, 3);
+    renderRelatedBehandlinger(randomRelated);
   } catch (error) {
     console.error("Fejl:", error);
-    document.body.innerHTML = `
-      <div style="padding: var(--spacing-5xl); text-align: center; background-color: var(--breeze); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <h1 class="font-editorial" style="font-size: var(--text-6xl); margin-bottom: var(--spacing-md);">Der skete en fejl</h1>
-        <p class="font-hedvig" style="font-size: var(--text-xl); margin-bottom: var(--spacing-md);">${error.message}</p>
-        <a href="spaoplevelser.html" class="font-hedvig" style="color: var(--terracotta); font-size: var(--text-xl);">← Tilbage til oversigt</a>
-      </div>
-    `;
   }
 }
 

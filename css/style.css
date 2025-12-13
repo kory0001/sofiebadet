@@ -63,7 +63,7 @@
   --text-xs: 14px;
   --text-sm: 18px;
   --text-base: 22px;
-  --text-lg: 30px;
+  --text-lg: 28px;
   --text-xl: 30px;
   --text-2xl: 45px;
   --text-3xl: 32px;
@@ -216,19 +216,86 @@ body {
    BUTTONS
    ====================== */
 
-button {
+/* ======================
+   BUTTON UTILITY CLASSES
+   ====================== */
+
+.button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  letter-spacing: 0.05em;
   cursor: pointer;
-  font-family: inherit;
-  border: none;
-  background: none;
-  font-size: inherit;
   transition: all var(--transition-base);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  font-family: var(--font-hedvig);
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+.button--primary {
+  background-color: var(--terracotta);
+  color: var(--stone);
+  border: none;
 }
+
+.button--primary:hover {
+  background-color: #8a3621;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button--primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.button--secondary {
+  background-color: transparent;
+  color: var(--mahogany);
+  border: 2px solid var(--mahogany);
+}
+
+.button--secondary:hover {
+  background-color: rgba(50, 22, 0, 0.05);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.button--secondary:active {
+  background-color: rgba(50, 22, 0, 0.1);
+}
+
+/* Disabled state */
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Full width variant */
+.button--full {
+  width: 100%;
+}
+
+/* Small variant */
+.button--small {
+  padding: var(--spacing-sm) var(--spacing-sm);
+  font-size: var(--text-sm);
+}
+
+/* Large variant */
+.button--large {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--text-lg);
+}
+
+
+
+
 
 .kategori__title {
   text-align: center;
@@ -258,6 +325,7 @@ button:disabled {
   align-items: center;
   gap: var(--spacing-md);
 }
+
 
 .filter__btn {
   margin: var(--spacing-xs);
@@ -406,16 +474,6 @@ button:disabled {
    BEHANDLING HERO
    ====================== */
 
-/* .behandling-hero {
-  background-color: var(--breeze);
-  padding: var(--spacing-3xl) 0 var(--spacing-xl);
-} */
-
-/* .behandling-hero__container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-} */
 
 .behandling-hero__title {
   font-size: var(--text-7xl);
@@ -440,6 +498,7 @@ button:disabled {
   align-items: start;
   margin: 0 auto;
   padding: 0 var(--container-padding);
+  padding-bottom:var(--spacing-5xl) ;
 }
 
 /* ======================
@@ -606,6 +665,89 @@ button:disabled {
 
 .behandling-description p:last-child {
   margin-bottom: var(--spacing-3xl);
+}
+
+
+/* =========================
+   RELATED SECTION
+========================= */
+
+.related__section {
+   padding: var(--container-padding);
+}
+
+/* TITLE */
+.related__title {
+  font-size: var(--text-7xl);
+  line-height: 100px;
+ letter-spacing: 0;
+  margin-bottom: var(--spacing-xl);
+
+}
+
+/* GRID */
+.related__card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+/* CARD */
+/* ======================
+   RELATED CARDS
+   ====================== */
+
+.related__card {
+  background-color: var(--stone);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+    box-shadow: var(--shadow-md);
+}
+
+
+
+.related__card--title {
+  font-size: var(--text-xl);
+  color: var(--terracotta);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.related__card--text {
+  font-size: var(--text-base);
+  font-family: var(--font-hedvig);
+  color: var(--mahogany);
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1; /* Fylder plads så knap er i bunden */
+}
+
+.related__card--meta {
+  font-size: var(--text-sm);
+  font-family: var(--font-hedvig);
+  color: var(--mahogany);
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* KNAP I CARD - IKKE FULD BREDDE */
+.related__card .button {
+  align-self: flex-start; /* ← VIGTIG: Gør knappen auto-width */
+  margin-top: var(--spacing-sm);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .related__card-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ======================
