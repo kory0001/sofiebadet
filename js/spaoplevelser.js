@@ -116,12 +116,12 @@ function renderBehandlinger() {
     html += `
       <div class="kategori-section">
         <!-- Kategori header -->
-        <div class="kategori-header">
-          <h2 class="font-editorial">${kategori}</h2>
+        <div class="kategori__header">
+          <h2 class="kategori__title font-editorial">${kategori}</h2>
           ${
             behandlinger[0].introTekst
               ? `
-            <p class="font-editorial-italic">${behandlinger[0].introTekst}</p>
+            <p class="kategori__intro font-editorial-italic">${behandlinger[0].introTekst}</p>
           `
               : ""
           }
@@ -149,43 +149,50 @@ function renderBehandlinger() {
 
 function createCard(behandling) {
   return `
-    <article>
-      <a href="behandling.html?slug=${behandling.slug}" class="behandling-card">
+    <article class="card ${behandling.kundefavorit ? "card--featured" : ""}">
+      <a href="behandling.html?slug=${behandling.slug}" class="card__link">
         
-        <!-- Navn -->
-        <h3 class="font-editorial">${behandling.navn}</h3>
-        
-        <!-- Beskrivelse -->
-        <p class="beskrivelse font-hedvig">${behandling.kortBeskrivelse}</p>     <!-- read-more -->
-        <div class="read-more font-buvera">
-          Læs mere <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-  <path d="M16.1379 13.4416H0V11.5584H16.1379C18.3024 11.5584 19.4483 12.1753 21.3263 12.1753V12.0779C17.634 10.3896 16.2653 8.50649 15.0239 6.55844L16.8382 5C18.6525 8.40909 20.5623 10.3247 24 11.9156V13.0519C20.5623 14.6429 18.6525 16.5909 16.8382 20L15.0239 18.4091C16.2653 16.4935 17.634 14.6104 21.3263 12.9221V12.8247C19.4483 12.8247 18.2706 13.4416 16.1379 13.4416Z" fill="#321600"/>
-</svg>
-        </div>
-        <!-- Detaljer -->
-        <div class="detaljer font-hedvig">
-          <div class="detalje">
+        <!-- VENSTRE KOLONNE: Tekst -->
+        <div class="card__content">
+          <h3 class="card__title font-buvera">${behandling.navn}</h3>
+          
+          <p class="card__description font-hedvig">${behandling.kortBeskrivelse}<span class="card__read-more font-buvera">Læs mere 
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M16.1379 13.4416H0V11.5584H16.1379C18.3024 11.5584 19.4483 12.1753 21.3263 12.1753V12.0779C17.634 10.3896 16.2653 8.50649 15.0239 6.55844L16.8382 5C18.6525 8.40909 20.5623 10.3247 24 11.9156V13.0519C20.5623 14.6429 18.6525 16.5909 16.8382 20L15.0239 18.4091C16.2653 16.4935 17.634 14.6104 21.3263 12.9221V12.8247C19.4483 12.8247 18.2706 13.4416 16.1379 13.4416Z" fill="#321600"/>
+            </svg>
+          </span></p>
+          
+   
+           
+          
+          <div class="card__meta font-hedvig">
             <span>${behandling.varighed}</span>
-          </div>
-          <div>•</div>
-          <div class="detalje">
+            <span>•</span>
             <span>${behandling.personer}</span>
           </div>
         </div>
         
-        <!-- Pris -->
-        <div class="pris">
-          ${
-            behandling.prisOriginal
-              ? `
-            <span class="pris-original font-hedvig">${behandling.prisOriginal},-</span>
-          `
-              : ""
-          }
-          <span class="pris-aktuel font-hedvig-italic">${behandling.pris},- pr. person</span>
+        <!-- HØJRE KOLONNE: Pris + Knap -->
+        <div class="card__aside">
+          <div class="card__pricing">
+            ${
+              behandling.prisOriginal
+                ? `
+              <span class="card__price card__price--old font-editorial-italic">${behandling.prisOriginal},- pr. person</span>
+            `
+                : ""
+            }
+            <span class="card__price card__price--current font-editorial-italic">${behandling.pris},- pr. person</span>
+          </div>
+          
+          <button class="card__button font-hedvig">
+            Book tid  <span><svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
+  <path d="M11.154 5.72H0V4.444H11.154C12.65 4.444 13.442 4.862 14.74 4.862V4.796C12.188 3.652 11.242 2.376 10.384 1.056L11.638 0C12.892 2.31 14.212 3.608 16.588 4.686V5.456C14.212 6.534 12.892 7.854 11.638 10.164L10.384 9.086C11.242 7.788 12.188 6.512 14.74 5.368V5.302C13.442 5.302 12.628 5.72 11.154 5.72Z" fill="#F6F6EC"/>
+</svg>
+          </span>
+          </button>
         </div>
         
-   
         
       </a>
     </article>

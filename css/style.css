@@ -62,15 +62,16 @@
   /* FONT SIZES */
   --text-xs: 12px;
   --text-sm: 14px;
-  --text-base: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
+  --text-base: 22px;
+  --text-lg: 24px;
+  --text-xl: 30px;
+  --text-2xl: 45px;
   --text-3xl: 32px;
   --text-4xl: 40px;
   --text-5xl: 48px;
   --text-6xl: 64px;
   --text-7xl: 72px;
+  --text-8xl: 300px;
 
   /* SPACING */
   --spacing-xs: 8px;
@@ -90,7 +91,7 @@
 
   /* SHADOWS */
   --shadow-sm: 0 2px 8px rgba(50, 22, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(50, 22, 0, 0.12);
+  --shadow-md: -8px 8px 25px 0 rgba(50, 22, 0, 0.25);
   --shadow-lg: 0 8px 24px rgba(50, 22, 0, 0.15);
   --shadow-xl: 0 12px 32px rgba(50, 22, 0, 0.2);
 
@@ -101,7 +102,7 @@
 
   /* CONTAINER */
   --container-max-width: 1280px;
-  --container-padding: var(--spacing-md);
+  --container-padding: var(--spacing-xl);
 }
 
 /* ======================
@@ -132,9 +133,14 @@ h2 {
 
 h3 {
   font-size: var(--text-3xl);
+  text-transform: uppercase;
+  color: var(--terracotta);
+  line-height: 25px; /* 55.556% */
+  letter-spacing: 1.35px;
 }
 
 p {
+  font-size: var(--text-base);
   margin: 0;
 }
 
@@ -186,6 +192,18 @@ body {
   padding: 0 var(--container-padding);
 }
 
+.hero__title {
+  font-size: var(--text-8xl);
+  line-height: 275px;
+  letter-spacing: -6px;
+}
+
+.hero__subtitle {
+  font-size: var(--text-xl);
+  color: var(--terracotta);
+  text-transform: uppercase;
+}
+
 /* ======================
    BUTTONS
    ====================== */
@@ -220,7 +238,7 @@ button:disabled {
 
 .filter__btn {
   padding: 8px 18px;
-  border-radius: 999px;
+  border-radius: var(--radius-md);
   border: 1.5px solid var(--mahogany);
   background-color: transparent;
   color: var(--mahogany);
@@ -233,23 +251,164 @@ button:disabled {
 
 .filter__btn:hover {
   background-color: rgba(50, 22, 0, 0.05);
+  padding: 8px 20px;
 }
 
-.filter__btn--active {
-  background-color: var(--mahogany);
-  color: var(--stone);
+/* ======================
+   CARD GRID LAYOUT
+   ====================== */
+
+.card {
+  width: 1055px;
+  height: 530px;
+  background-color: var(--stone);
+  padding: var(--container-padding);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-md);
 }
 
-.read-more {
+.card__link {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  text-decoration: none;
+}
+
+/* ======================
+   VENSTRE KOLONNE
+   ====================== */
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.card__title {
+  font-size: var(--text-2xl);
+  color: var(--terracotta);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.card__description {
+  font-size: var(--text-base);
+  color: var(--mahogany);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card__read-more {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  font-size: var(--text-base);
+  color: var(--mahogany);
+  margin-top: var(--spacing-xs);
+  transition: gap var(--transition-base);
 }
 
-.detaljer {
+.card:hover .card__read-more {
+  gap: var(--spacing-sm);
+}
+
+.card__read-more svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.card__meta {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   gap: var(--spacing-xs);
+  font-size: var(--text-sm);
+  color: var(--mahogany);
+  opacity: 0.7;
+  margin-top: var(--spacing-xs);
+}
+
+/* ======================
+   HØJRE KOLONNE
+   ====================== */
+
+.card__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-md);
+  text-align: right;
+  min-width: 200px;
+}
+
+.card__pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card__price {
+  font-size: var(--text-xl);
+  color: var(--mahogany);
+  white-space: nowrap;
+}
+
+.card__price--old {
+  font-size: var(--text-sm);
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.card__price--current {
+  font-size: var(--text-xl);
+}
+
+.card__button {
+  padding: 12px 24px;
+  background-color: var(--terracotta);
+  color: var(--stone);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.card__button:hover {
+  background-color: #8a3621;
+  transform: translateY(-1px);
+}
+
+/* ======================
+   RESPONSIVE
+   ====================== */
+
+@media (max-width: 768px) {
+  .card__link {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .card__aside {
+    align-items: flex-start;
+    text-align: left;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .card__button {
+    width: 100%;
+  }
+
+  .card__badge {
+    bottom: var(--spacing-md);
+    left: var(--spacing-md);
+  }
 }
 
 /* ======================
@@ -258,6 +417,7 @@ button:disabled {
 
 @media (max-width: 768px) {
   :root {
+    --text-8xl: 135px;
     --text-7xl: 48px;
     --text-6xl: 40px;
     --text-5xl: 36px;
