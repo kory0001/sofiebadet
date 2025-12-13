@@ -109,7 +109,6 @@
    ====================== */
 
 h1,
-h2,
 h3,
 h4,
 h5,
@@ -122,9 +121,12 @@ h6 {
 
 h1 {
   font-size: var(--text-7xl);
+  text-transform: uppercase;
 }
 
 h2 {
+  font-family: var(--font-buvera);
+  font-weight: 400;
   font-size: var(--text-5xl);
 }
 
@@ -141,6 +143,10 @@ a {
   text-decoration: none;
 }
 
+body {
+  background-color: var(--breeze);
+  color: var(--mahogany);
+}
 /* ======================
    UTILITY CLASSES
    ====================== */
@@ -167,8 +173,11 @@ a {
 
 .font-buvera {
   font-family: var(--font-buvera);
+  /* letter-spacing: 0.1em; */
+}
+
+.uppercase {
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .container {
@@ -193,6 +202,54 @@ button {
 button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+.filter__label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--mahogany);
+  opacity: 50%;
+}
+
+.filter__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.filter__btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--mahogany);
+  background-color: transparent;
+  color: var(--mahogany);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.filter__btn:hover {
+  background-color: rgba(50, 22, 0, 0.05);
+}
+
+.filter__btn--active {
+  background-color: var(--mahogany);
+  color: var(--stone);
+}
+
+.read-more {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.detaljer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xs);
 }
 
 /* ======================

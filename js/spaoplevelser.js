@@ -34,7 +34,7 @@ async function getBehandlinger() {
 
   const data = await response.json();
 
-  // Map til det format vi bruger (præcis som dit eksempel)
+  // Map til det format vi bruger
   return data.map((b) => ({
     slug: b.slug,
     navn: b.navn,
@@ -61,7 +61,7 @@ function renderFilterButtons() {
   const buttonsHTML = KATEGORIER.map(
     (kat) => `
     <button 
-      class="filter-btn font-buvera ${activeFilter === kat.slug ? "active" : ""}" 
+      class="filter__btn font-buvera ${activeFilter === kat.slug ? "active" : ""}" 
       onclick="setFilter('${kat.slug}')"
     >
       ${kat.navn}
@@ -72,7 +72,7 @@ function renderFilterButtons() {
   // Tilføj "Ryd alle" knap hvis filter er aktiv
   const clearBtn = activeFilter
     ? `
-    <button class="filter-btn clear-btn font-buvera" onclick="setFilter(null)">
+    <button class="filter__btn clear-btn font-buvera" onclick="setFilter(null)">
       Ryd alle <span>×</span>
     </button>
   `
@@ -121,7 +121,7 @@ function renderBehandlinger() {
           ${
             behandlinger[0].introTekst
               ? `
-            <p class="font-editorial-light-italic">${behandlinger[0].introTekst}</p>
+            <p class="font-editorial-italic">${behandlinger[0].introTekst}</p>
           `
               : ""
           }
@@ -152,32 +152,23 @@ function createCard(behandling) {
     <article>
       <a href="behandling.html?slug=${behandling.slug}" class="behandling-card">
         
-        <!-- Kundefavorit badge -->
-        ${
-          behandling.kundefavorit
-            ? `
-          <div class="badge">
-            <span>⭐</span>
-            <span class="font-buvera">Kundefavorit</span>
-          </div>
-        `
-            : ""
-        }
-        
         <!-- Navn -->
         <h3 class="font-editorial">${behandling.navn}</h3>
         
         <!-- Beskrivelse -->
-        <p class="beskrivelse font-hedvig">${behandling.kortBeskrivelse}</p>
-        
+        <p class="beskrivelse font-hedvig">${behandling.kortBeskrivelse}</p>     <!-- read-more -->
+        <div class="read-more font-buvera">
+          Læs mere <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+  <path d="M16.1379 13.4416H0V11.5584H16.1379C18.3024 11.5584 19.4483 12.1753 21.3263 12.1753V12.0779C17.634 10.3896 16.2653 8.50649 15.0239 6.55844L16.8382 5C18.6525 8.40909 20.5623 10.3247 24 11.9156V13.0519C20.5623 14.6429 18.6525 16.5909 16.8382 20L15.0239 18.4091C16.2653 16.4935 17.634 14.6104 21.3263 12.9221V12.8247C19.4483 12.8247 18.2706 13.4416 16.1379 13.4416Z" fill="#321600"/>
+</svg>
+        </div>
         <!-- Detaljer -->
         <div class="detaljer font-hedvig">
           <div class="detalje">
-            <span>⏰</span>
             <span>${behandling.varighed}</span>
           </div>
+          <div>•</div>
           <div class="detalje">
-            <span>👥</span>
             <span>${behandling.personer}</span>
           </div>
         </div>
@@ -194,10 +185,7 @@ function createCard(behandling) {
           <span class="pris-aktuel font-hedvig-italic">${behandling.pris},- pr. person</span>
         </div>
         
-        <!-- CTA -->
-        <div class="cta font-hedvig">
-          Læs mere →
-        </div>
+   
         
       </a>
     </article>
