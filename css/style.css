@@ -186,6 +186,10 @@ body {
   text-transform: uppercase;
 }
 
+.teracotta{
+  color: var(--terracotta);
+}
+
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -340,7 +344,6 @@ body {
     
 }
 
-
 /* Meta section - description + arrows */
 .reviews__meta {
   display: flex;
@@ -384,21 +387,6 @@ padding:var(--spacing-2xl) var(--container-padding);
 /* ======================
    REVIEW CARDS
    ====================== */
-
-/* .reviews__card {
-  min-width: calc(33.333% - var(--spacing-lg) * 2 / 3);
-  background-color: var(--stone);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-  flex-shrink: 0;
-
-
-  
-} */
 .reviews__card {
   min-width: calc(33.333% - var(--spacing-lg) * 2 / 3);
   max-height: 320px; /* justér efter prototype */
@@ -421,23 +409,16 @@ padding:var(--spacing-2xl) var(--container-padding);
 }
 
 .reviews__text {
-
   font-size: var(--text-sm);
   line-height: 1.6;
-
-
-
 }
 
 .reviews__author {
   font-size: var(--text-xs);
-  opacity: 0.7;
+  opacity: 0.5;
   margin: 0;
 }
 
-.reviews__author-title {
-  opacity: 0.5;
-}
 
 /* ======================
    CAROUSEL ARROWS
@@ -451,7 +432,7 @@ padding:var(--spacing-2xl) var(--container-padding);
   background-color: transparent;
   cursor: pointer;
   transition: all var(--transition-base);
-   color: var(--mahogany); /* ← SVG farve */
+   color: var(--mahogany); 
 
 }
 
@@ -482,23 +463,23 @@ padding:var(--spacing-2xl) var(--container-padding);
 
 .newsletter {
   padding: var(--spacing-5xl) 0;
-  background-color: var(--breeze);
 }
 
 .newsletter__container {
-  max-width: 600px;
+  transform: rotate(1deg);
+  max-width: 850px;
   margin: 0 auto;
-  padding: var(--spacing-3xl);
+  padding:  var(--spacing-3xl);
   background-color: var(--stone);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   text-align: center;
 }
 
 .newsletter__title {
-  font-size: var(--text-5xl);
-  line-height: 1.2;
-  margin-bottom: var(--spacing-lg);
+  font-size: var(--text-7xl);
+  line-height: 0.9;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .newsletter__offer {
@@ -507,17 +488,18 @@ padding:var(--spacing-2xl) var(--container-padding);
 
 .newsletter__highlight {
   color: var(--terracotta);
-  font-size: var(--text-sm);
+  font-size: var(--text-xl);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: 500;
+  margin-bottom: var(--spacing-sm); 
 }
 
 .newsletter__text {
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-xl);
-  opacity: 0.9;
+font-size: var(--text-base);
+line-height: 1.6;
+padding-bottom: var(--spacing-xl);
+padding-left: 100px;
+padding-right: 100px;
 }
 
 /* ======================
@@ -562,9 +544,6 @@ padding:var(--spacing-2xl) var(--container-padding);
   margin: 0;
 }
 
-.newsletter__disclaimer a {
-  text-decoration: underline;
-}
 
 /* ======================
    RESPONSIVE - TABLET
@@ -1108,6 +1087,275 @@ padding:var(--spacing-2xl) var(--container-padding);
 .related__card .button {
   align-self: flex-start; /* ← VIGTIG: Gør knappen auto-width */
   margin-top: var(--spacing-sm);
+}
+
+
+
+
+/* ======================
+   FOOTER
+   ====================== */
+
+.footer {
+  padding: var(--spacing-5xl) 0 var(--spacing-3xl);
+}
+
+.footer__container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 0.8fr 0.8fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+/* ======================
+   LOGO + COPYRIGHT
+   ====================== */
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.footer__logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.footer__copyright p {
+  font-size: var(--text-base);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.footer__copyright {
+  margin-top: auto; 
+}
+
+/* ======================
+   FOOTER SECTIONS
+   ====================== */
+
+.footer__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.footer__title {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+/* ======================
+   ÅBNINGSTIDER
+   ====================== */
+
+.footer__hours {
+  display: grid;
+  grid-template-columns: auto auto; 
+  gap: var(--spacing-md); 
+  font-family: var(--font-hedvig);
+}
+
+.footer__hours-days {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer__hours-days p {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0;
+}
+
+.footer__hours-times {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer__hours-times p {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer__note {
+  font-size: var(--text-xs);
+  margin-top: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.terracotta {
+  color: var(--terracotta);
+}
+/* ======================
+   KONTAKT
+   ====================== */
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.footer__contact-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer__label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin: 0;
+}
+
+.footer__contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--text-sm);
+  color: var(--mahogany);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  line-height: 1.6;
+}
+
+.footer__contact-item:hover {
+  color: var(--terracotta);
+}
+
+.footer__contact-item svg {
+  flex-shrink: 0;
+}
+
+/* ======================
+   ADRESSE
+   ====================== */
+
+.footer__address {
+  display: flex;
+  gap: var(--spacing-sm);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.footer__address svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.footer__address p {
+  margin: 0;
+}
+
+/* ======================
+   SOCIAL MEDIA
+   ====================== */
+
+.footer__newsletter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--text-sm);
+  color: var(--mahogany);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer__newsletter:hover {
+  color: var(--terracotta);
+  gap: var(--spacing-md);
+}
+
+.footer__newsletter svg {
+  flex-shrink: 0;
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.footer__social a {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mahogany);
+  border-radius: 50%;
+  color: var(--mahogany);
+  transition: all var(--transition-base);
+}
+
+.footer__social a:hover {
+  background-color: var(--mahogany);
+  color: var(--stone);
+  transform: translateY(-2px);
+}
+
+/* ======================
+   RESPONSIVE - TABLET
+   ====================== */
+
+@media (max-width: 1024px) {
+  .footer__container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2xl);
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+    justify-self: center;
+    text-align: center;
+  }
+}
+
+/* ======================
+   RESPONSIVE - MOBILE
+   ====================== */
+
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+  }
+
+  .footer__container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .footer__brand {
+    grid-column: 1;
+  }
+
+  .footer__logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .footer__title {
+    font-size: var(--text-xl);
+  }
+
+  .footer__list li {
+    font-size: var(--text-sm);
+  }
+
+  .footer__social a {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 
