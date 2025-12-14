@@ -187,7 +187,7 @@ function createCard(behandling) {
             <span class="card__price card__price--current font-editorial-italic">${behandling.pris},- pr. person</span>
           </div>
           
-          <button class="card__button font-hedvig">
+          <button class="button button--primary">
             Book tid  <span><svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
   <path d="M11.154 5.72H0V4.444H11.154C12.65 4.444 13.442 4.862 14.74 4.862V4.796C12.188 3.652 11.242 2.376 10.384 1.056L11.638 0C12.892 2.31 14.212 3.608 16.588 4.686V5.456C14.212 6.534 12.892 7.854 11.638 10.164L10.384 9.086C11.242 7.788 12.188 6.512 14.74 5.368V5.302C13.442 5.302 12.628 5.72 11.154 5.72Z" fill="#F6F6EC"/>
 </svg>

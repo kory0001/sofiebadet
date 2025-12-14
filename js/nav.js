@@ -1,15 +1,13 @@
 // =====================================================
 // NAVIGATION FUNCTIONALITY - SOFIEBADET
 // =====================================================
-
 class Navigation {
   constructor() {
     this.burger = document.querySelector(".navbar__burger");
     this.mobileMenu = document.querySelector(".mobile-menu");
-    this.languageToggle = document.querySelector(".language-toggle");
+    this.languageToggle = document.querySelector(".navbar__language-toggle"); // ← RETTET
     this.languageContainer = document.querySelector(".navbar__language");
     this.body = document.body;
-
     this.init();
   }
 
@@ -50,9 +48,6 @@ class Navigation {
         this.closeMobileMenu();
       });
     });
-
-    // Prevent scroll when mobile menu is open
-    this.preventScrollWhenMenuOpen();
   }
 
   toggleMobileMenu() {
@@ -72,31 +67,13 @@ class Navigation {
   }
 
   changeLanguage(lang) {
-    console.log(`Language changed to: ${lang}`);
-    // Her kan du implementere faktisk sprogskift
-    // For nu logger vi bare til konsollen
+    console.log(`Language changed to: ${lang}`); // ← RETTET
 
     // Update button text
     this.languageToggle.childNodes[0].textContent = lang.toUpperCase() + " ";
 
     // Close dropdown
     this.languageContainer.classList.remove("active");
-
-    // Her ville du normalt:
-    // - Opdatere URL (f.eks. /da/ eller /en/)
-    // - Loade translations
-    // - Opdatere content
-  }
-
-  preventScrollWhenMenuOpen() {
-    // Prevent body scroll when mobile menu is open
-    const style = document.createElement("style");
-    style.innerHTML = `
-            body.menu-open {
-                overflow: hidden;
-            }
-        `;
-    document.head.appendChild(style);
   }
 }
 
@@ -105,12 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
   new Navigation();
 });
 
-// Optional: Add scroll behavior for navbar
 window.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar");
   if (window.scrollY > 50) {
-    navbar.style.boxShadow = "0 4px 12px rgba(50, 22, 0, 0.15)";
+    navbar.style.boxShadow = "var(--shadow-md)";
   } else {
-    navbar.style.boxShadow = "0 2px 8px rgba(50, 22, 0, 0.1)";
+    navbar.style.boxShadow = "none";
   }
 });

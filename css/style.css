@@ -244,18 +244,18 @@ body {
 .button--primary {
   background-color: var(--terracotta);
   color: var(--stone);
-  border: none;
+  border: 2px solid var(--terracotta);
 }
 
 .button--primary:hover {
-  background-color: #8a3621;
+  background-color: var(--mahogany);
+    border: 2px solid var(--mahogany);
+  color: var(--stone);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .button--primary:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
 .button--secondary {
@@ -266,8 +266,7 @@ body {
 
 .button--secondary:hover {
   background-color: rgba(50, 22, 0, 0.05);
-  border-color: var(--terracotta);
-  color: var(--terracotta);
+    transform: translateY(-2px);
 }
 
 .button--secondary:active {
@@ -302,29 +301,24 @@ body {
    NAVIGATION
    ====================== */
 
-:root {
-    --nav-height: 80px;
-}
-
 .navbar {
     position: sticky;
     top: 0;
     width: 100%;
-    height: var(--nav-height);
+    height: 80px;
     background: var(--breeze);
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(50, 22, 0, 0.1);
+   transition: box-shadow 0.4s ease-in-out;
 }
 
 .navbar__container {
-    max-width: 1400px;
+    max-width: var(--container-max-width); 
     margin: 0 auto;
     height: 100%;
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--container-padding); 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--spacing-lg);
 }
 
 /* LOGO */
@@ -332,38 +326,32 @@ body {
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    margin-right: var(--spacing-xl);
 }
 
-.navbar__logo svg {
-    height: 50px;
+.navbar__logo img {
+    height: 60px;
     width: auto;
-    transition: transform var(--transition-base);
-}
-
-.navbar__logo:hover svg {
-    transform: scale(1.05);
 }
 
 /* DESKTOP MENU */
 .navbar__menu {
     display: flex;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-xl); 
     list-style: none;
     flex-shrink: 0;
     margin: 0;
+    margin-right: auto; /* Skubber CTA buttons til højre */
 }
 
 .navbar__link {
-    font-family: var(--font-editorial);
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--mahogany);
-    text-decoration: none;
+    font-family: var(--font-buvera);
+    font-size: var(--text-base);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
     position: relative;
-    transition: color var(--transition-base);
-    white-space: nowrap;
+  
 }
 
 .navbar__link::after {
@@ -373,12 +361,8 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--terracotta);
+    background: var(--mahogany);
     transition: width var(--transition-base);
-}
-
-.navbar__link:hover {
-    color: var(--terracotta);
 }
 
 .navbar__link:hover::after {
@@ -412,23 +396,19 @@ body {
 .navbar__language-toggle {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: var(--spacing-xs);
     padding: 8px 14px;
     background: transparent;
-    border: 2px solid var(--mahogany);
-    border-radius: var(--radius-md);
-    font-family: var(--font-hedvig);
-    font-size: 15px;
-    font-weight: 600;
+    border: none;
+    font-family: var(--font-buvera);
+    font-size: var(--text-base);
     color: var(--mahogany);
     cursor: pointer;
     transition: all var(--transition-base);
-    white-space: nowrap;
 }
 
 .navbar__language-toggle:hover {
-    background: var(--mahogany);
-    color: var(--stone);
+  transform: scale(1.05);
 }
 
 .navbar__language-toggle svg {
@@ -442,28 +422,28 @@ body {
 
 .navbar__language-dropdown {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 30px);
     right: 0;
     background: var(--stone);
-    border: 2px solid var(--mahogany);
     border-radius: var(--radius-md);
-    padding: var(--spacing-xs);
+    padding:var(--spacing-sm) ;
     min-width: 120px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all var(--transition-base);
     box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
 }
 
 .navbar__language.active .navbar__language-dropdown {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
 .navbar__language-dropdown a {
     display: block;
+    font-size: var(--text-base);
+    font-family: var(--font-buvera);
+    text-transform: uppercase;
     padding: var(--spacing-xs) var(--spacing-sm);
     color: var(--mahogany);
     text-decoration: none;
@@ -486,25 +466,44 @@ body {
 .navbar__burger {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 8px;
-    order: -1; /* Flytter burger til venstre */
+    order: -1;
+    width: 40px;
+    height: 40px;
+    position: relative;
 }
 
 .navbar__burger span {
     display: block;
     width: 26px;
-    height: 3px;
+    height: 2px;
     background: var(--mahogany);
     border-radius: 2px;
     transition: all var(--transition-base);
+    position: absolute;
+}
+
+.navbar__burger span:nth-child(1) {
+    top: 12px;
+}
+
+.navbar__burger span:nth-child(2) {
+    top: 19px;
+}
+
+.navbar__burger span:nth-child(3) {
+    top: 26px;
 }
 
 .navbar__burger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    top: 19px;
+    transform: rotate(45deg);
 }
 
 .navbar__burger.active span:nth-child(2) {
@@ -512,7 +511,8 @@ body {
 }
 
 .navbar__burger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    top: 19px;
+    transform: rotate(-45deg);
 }
 
 /* ======================
@@ -521,13 +521,13 @@ body {
 
 .mobile-menu {
     position: fixed;
-    top: var(--nav-height);
+    top: 80px;
     left: 0;
     width: 100%;
-    height: calc(100vh - var(--nav-height));
+    height: calc(100vh - 80px);
     background: var(--stone);
     z-index: 999;
-    transform: translateX(-100%); /* Slide ind fra venstre */
+    transform: translateX(-100%);
     transition: transform var(--transition-base);
     overflow-y: auto;
 }
@@ -537,7 +537,7 @@ body {
 }
 
 .mobile-menu__content {
-    padding: var(--spacing-2xl) var(--spacing-xl);
+    padding: var(--spacing-2xl) var(--container-padding);
 }
 
 .mobile-menu__list {
@@ -551,13 +551,10 @@ body {
 }
 
 .mobile-menu__link {
-    font-family: var(--font-editorial);
-    font-size: 26px;
-    font-weight: 400;
-    color: var(--mahogany);
-    text-decoration: none;
+    font-family: var(--font-buvera);
+    font-size: var(--text-base);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.05em;
     transition: color var(--transition-base);
     display: block;
 }
@@ -568,14 +565,12 @@ body {
 
 .mobile-menu__link--highlight {
     color: var(--terracotta);
-    font-weight: 500;
+   
 }
 
 .mobile-menu__language {
     display: flex;
     gap: var(--spacing-sm);
-    padding-top: var(--spacing-xl);
-    border-top: 2px solid var(--breeze);
 }
 
 .mobile-menu__lang {
@@ -583,15 +578,16 @@ body {
     background: var(--breeze);
     color: var(--mahogany);
     text-decoration: none;
-    border-radius: var(--radius-full);
-    font-weight: 600;
+    border-radius: var(--radius-md);
+font-family: var(--font-buvera);
+text-transform: uppercase;
     transition: all var(--transition-base);
-    font-size: 15px;
+    font-size: var(--text-base);
 }
 
 .mobile-menu__lang:hover {
-    background: var(--mahogany);
-    color: var(--stone);
+
+  transform: translateY(-3px);
 }
 
 /* Body scroll lock */
@@ -604,16 +600,16 @@ body.menu-open {
    ====================== */
 
 @media (max-width: 1200px) {
-    .navbar__container {
-        padding: 0 var(--spacing-lg);
-    }
-    
     .navbar__menu {
-        gap: var(--spacing-lg);
+        gap: var(--spacing-md);
     }
     
-    .navbar__link {
+    /* .navbar__link {
         font-size: 16px;
+    } */
+    
+    .navbar__logo {
+        margin-right: var(--spacing-lg);
     }
 }
 
@@ -631,35 +627,35 @@ body.menu-open {
         justify-content: space-between;
     }
     
-    /* MOBILE LAYOUT: Burger - Logo - Book knap */
-    .navbar__container {
-        gap: var(--spacing-md);
-    }
-    
     /* Logo i midten */
     .navbar__logo {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        margin-right: 0;
     }
 }
 
 @media (max-width: 480px) {
-    :root {
-        --nav-height: 70px;
+    .navbar {
+        height: 70px;
     }
     
     .navbar__container {
         padding: 0 var(--spacing-md);
-        gap: var(--spacing-sm);
     }
     
-    .navbar__logo svg {
+    .navbar__logo img {
         height: 40px;
     }
     
     .navbar__burger span {
         width: 24px;
+    }
+    
+    .mobile-menu {
+        top: 70px;
+        height: calc(100vh - 70px);
     }
     
     .mobile-menu__link {
@@ -670,7 +666,6 @@ body.menu-open {
         padding: var(--spacing-xl) var(--spacing-md);
     }
 }
-
 
 /* ======================
    HOMEPAGE HERO SECTION
@@ -1171,7 +1166,7 @@ padding-right: 100px;
   font-size: var(--text-5xl);
 }
 
-.card__button {
+/* .card__button {
   padding: 12px 24px;
   background-color: var(--terracotta);
   color: var(--stone);
@@ -1182,7 +1177,7 @@ padding-right: 100px;
   cursor: pointer;
   transition: all var(--transition-base);
   white-space: nowrap;
-}
+} */
 
 .card__button:hover {
   background-color: #8a3621;
@@ -1331,43 +1326,7 @@ padding-right: 100px;
   }
 }
 
-.behandling-info__cta {
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-md);
-  font-size: var(--text-base);
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  border: none;
-  margin-bottom: var(--spacing-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-}
 
-/* Primary button (Book tid) */
-.behandling-info__cta:not(.behandling-info__cta--secondary) {
-  background-color: var(--terracotta);
-  color: var(--stone);
-}
-
-.behandling-info__cta:not(.behandling-info__cta--secondary):hover {
-  background-color: #8a3621;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Secondary button (Bestil gavekort) */
-.behandling-info__cta--secondary {
-  background-color: transparent;
-  color: var(--mahogany);
-  border: 2px solid var(--mahogany);
-}
-
-.behandling-info__cta--secondary:hover {
-  background-color: rgba(50, 22, 0, 0.05);
-}
 
 /* ======================
    BESKRIVELSE (HØJRE)
