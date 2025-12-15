@@ -1592,21 +1592,76 @@ SOCIAL MEDIA
 
 .footer__social a:hover {
   transform: translateY(-2px);
+}
 
 
 
-}/* ======================================================================
-   RESPONSIVE BREAKPOINTS
-   =====================================================================
-   
+/************************************************* ANIMATIONER **************************************************/
 
-/* ======================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ====================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1.6s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              transform 1.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.fade-in:nth-child(1) { transition-delay: 0s; }
+.fade-in:nth-child(2) { transition-delay: 0.2s; }
+.fade-in:nth-child(3) { transition-delay: 0.3s; }
+.fade-in:nth-child(4) { transition-delay: 0.4s; }
+
+/* Store titler - vifte effekt linje for linje */
+.hero__title.fade-in,
+.kategori__title.fade-in {
+  overflow: hidden;
+  display: block;
+}
+
+.hero__title.fade-in span,
+.kategori__title.fade-in span {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 1s cubic-bezier(0.25, 0.1, 0.25, 1),
+              transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.hero__title.fade-in.visible span,
+.kategori__title.fade-in.visible span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Forskudt delay for hver linje - vifte! */
+.hero__title.fade-in.visible span:nth-child(1),
+.kategori__title.fade-in.visible span:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.hero__title.fade-in.visible span:nth-child(2),
+.kategori__title.fade-in.visible span:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.hero__title.fade-in.visible span:nth-child(3),
+.kategori__title.fade-in.visible span:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+
+/* ======================================================================
+RESPONSIVE BREAKPOINTS
+===================================================================== */
 
 @media (max-width: 768px) {
   
-  /* ==================== GLOBAL ==================== */
+/* ==================== GLOBAL ==================== */
   
   :root {
     /* FONT SIZES - MOBILE */
@@ -1904,7 +1959,10 @@ SOCIAL MEDIA
   .related__card-container {
     grid-template-columns: 1fr;
   }
-  /* ==================== FOOTER ==================== */
+
+
+  
+/* ==================== FOOTER ==================== */
   
 .footer {
   padding: var(--spacing-3xl) 0 var(--spacing-2xl);
@@ -1915,7 +1973,6 @@ SOCIAL MEDIA
   gap: var(--spacing-xl);
 }
 
-/* Centrerer KUN logo og copyright */
 .footer__brand {
   grid-column: 1;
   display: flex;

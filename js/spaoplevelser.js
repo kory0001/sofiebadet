@@ -1,3 +1,10 @@
+// Supabase configuration
+const SUPABASE_URL = "https://vdkcizkrlybxlhwegkzu.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZka2NpemtybHlieGxod2Vna3p1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzNTU4NjksImV4cCI6MjA4MDkzMTg2OX0.JIcfc4MJxyq0YArmV4PbezNBaAh8QEirEgYv6jJVgXo";
+
+// API endpoint
+const API_BASE = `${SUPABASE_URL}/rest/v1`;
+
 // ==========================================
 // STATE
 // ==========================================
@@ -169,8 +176,8 @@ function renderBehandlinger() {
     html += `
       <div class="kategori-section">
         <div class="kategori__header">
-          <h3 class="kategori__title font-editorial">${kategori}</h3>
-          ${behandlinger[0].introTekst ? `<p class="kategori__intro font-editorial-italic">${behandlinger[0].introTekst}</p>` : ""}
+          <h3 class="kategori__title font-editorial fade-in">${kategori}</h3>
+          ${behandlinger[0].introTekst ? `<p class="kategori__intro font-editorial-italic fade-in">${behandlinger[0].introTekst}</p>` : ""}
         </div>
         
         <div class="behandlinger-grid">
@@ -185,7 +192,12 @@ function renderBehandlinger() {
   }
 
   container.innerHTML = html;
-} // ==========================================
+
+  // RE-INITIALIZE ANIMATIONS
+  new ScrollAnimations();
+}
+
+// ==========================================
 // STEP 5: CREATE BEHANDLING CARD
 // ==========================================
 function createCard(behandling) {
