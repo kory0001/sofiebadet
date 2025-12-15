@@ -1,6 +1,7 @@
 /* ======================
-   FONT FACES
-   ====================== */
+FONT-FACES
+====================== */
+
 /* PP EDITORIAL NEW */
 @font-face {
   font-family: "PP Editorial New";
@@ -43,9 +44,11 @@
   font-display: swap;
 }
 
+
+
 /* ======================
-   CSS VARIABLES (:root)
-   ====================== */
+CSS VARIABLES (:ROOT)
+====================== */
 
 :root {
   /* FARVER */
@@ -65,13 +68,11 @@
   --text-base: 22px;
   --text-lg: 28px;
   --text-xl: 30px;
-  --text-2xl: 45px;
-  --text-3xl: 32px;
-  --text-4xl: 40px;
-  --text-5xl: 48px;
-  --text-6xl: 64px;
-  --text-7xl: 100px;
-  --text-8xl: 300px;
+  --text-2xl: 40px;
+  --text-3xl: 45px;
+  --text-4xl: 64px;
+  --text-5xl: 100px;
+  --text-6xl: 250px;
 
   /* SPACING */
   --spacing-xs: 8px;
@@ -85,30 +86,26 @@
   --spacing-5xl: 200px;
 
   /* BORDER RADIUS */
-  --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
 
   /* SHADOWS */
-  --shadow-sm: 0 2px 8px rgba(50, 22, 0, 0.08);
   --shadow-md: -8px 8px 25px 0 rgba(50, 22, 0, 0.25);
-  --shadow-lg: 0 8px 24px rgba(50, 22, 0, 0.15);
-  --shadow-xl: 0 12px 32px rgba(50, 22, 0, 0.2);
+ 
 
   /* TRANSITIONS */
   --transition-fast: 150ms ease;
-  --transition-base: 200ms ease;
-  --transition-slow: 300ms ease;
+  --transition-base: 300ms ease;
 
   /* CONTAINER */
   --container-max-width: 1280px;
   --container-padding: var(--spacing-2xl);
 }
 
+
+
 /* ======================
-   TYPOGRAPHY
-   ====================== */
+TYPOGRAPHY
+====================== */
 
 h1,
 h3,
@@ -122,19 +119,19 @@ h6 {
 }
 
 h1 {
-  font-size: var(--text-7xl);
+  font-size: var(--text-5xl);
   text-transform: uppercase;
 }
 
-h2 {
+h2 {  
+  font-size: var(--text-3xl);
   font-family: var(--font-buvera);
   font-weight: 400;
-  font-size: var(--text-5xl);
 }
 
 h3 {
-  font-size: var(--text-6xl);
-  line-height: 25px; /* 55.556% */
+  font-size: var(--text-4xl);
+  line-height: 25px;
   letter-spacing: 1.35px;
 }
 
@@ -153,9 +150,12 @@ body {
   background-color: var(--breeze);
   color: var(--mahogany);
 }
+
+
+
 /* ======================
-   UTILITY CLASSES
-   ====================== */
+UTILITY CLASSES
+====================== */
 
 .font-editorial {
   font-family: var(--font-editorial);
@@ -179,11 +179,14 @@ body {
 
 .font-buvera {
   font-family: var(--font-buvera);
-  /* letter-spacing: 0.1em; */
 }
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.bold {
+  font-weight: 500;
 }
 
 .teracotta{
@@ -197,7 +200,7 @@ body {
 }
 
 .hero__title {
-  font-size: var(--text-8xl);
+  font-size: var(--text-6xl);
   line-height: 275px;
   letter-spacing: -6px;
   margin-bottom: var(--spacing-5xl);
@@ -216,13 +219,11 @@ body {
   max-width: 50%;
 }
 
-/* ======================
-   BUTTONS
-   ====================== */
+
 
 /* ======================
-   BUTTON UTILITY CLASSES
-   ====================== */
+BUTTONS
+====================== */
 
 .button {
   padding: var(--spacing-sm) var(--spacing-lg);
@@ -279,7 +280,7 @@ body {
   transform: none !important;
 }
 
-/* Full width variant */
+/* Full variant */
 .button--full {
   width: 100%;
 }
@@ -296,9 +297,12 @@ body {
   font-size: var(--text-lg);
 }
 
+
+/************************************************* NAVIGATOIONBAR - MENU **************************************************/
+
 /* ======================
-   NAVIGATION
-   ====================== */
+NAVBAR - DESKTOP
+====================== */
 
 .navbar {
     position: sticky;
@@ -339,7 +343,7 @@ body {
     list-style: none;
     flex-shrink: 0;
     margin: 0;
-    margin-right: auto; /* Skubber CTA buttons til højre */
+    margin-right: auto;
 }
 
 .navbar__link {
@@ -367,7 +371,6 @@ body {
     width: 100%;
 }
 
-/* CTA BUTTONS */
 .navbar__cta {
     display: flex;
     gap: var(--spacing-sm);
@@ -375,7 +378,7 @@ body {
     flex-shrink: 0;
 }
 
-/* Override button styling for navbar */
+
 .navbar__cta .button,
 .navbar__mobile .button {
     white-space: nowrap;
@@ -445,7 +448,7 @@ body {
     padding: var(--spacing-xs) var(--spacing-sm);
     color: var(--mahogany);
     text-decoration: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     transition: background var(--transition-base);
 }
 
@@ -513,9 +516,11 @@ body {
     transform: rotate(-45deg);
 }
 
+
+
 /* ======================
-   MOBILE MENU OVERLAY
-   ====================== */
+MOBILE MENU OVERLAY
+====================== */
 
 .mobile-menu {
     position: fixed;
@@ -593,84 +598,41 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* ======================
-   NAVIGATION RESPONSIVE
-   ====================== */
 
-@media (max-width: 1200px) {
-    .navbar__menu {
-        gap: var(--spacing-md);
-    }
-    
-    /* .navbar__link {
-        font-size: 16px;
-    } */
-    
-    .navbar__logo {
-        margin-right: var(--spacing-lg);
-    }
-}
 
-@media (max-width: 900px) {
-    /* HIDE DESKTOP MENU & CTA */
-    .navbar__menu,
-    .navbar__cta {
-        display: none;
-    }
-    
-    /* SHOW MOBILE ELEMENTS */
-    .navbar__mobile {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    /* Logo i midten */
-    .navbar__logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-right: 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        height: 70px;
-    }
-    
-    .navbar__container {
-        padding: 0 var(--spacing-md);
-    }
-    
-    .navbar__logo img {
-        height: 40px;
-    }
-    
-    .navbar__burger span {
-        width: 24px;
-    }
-    
-    .mobile-menu {
-        top: 70px;
-        height: calc(100vh - 70px);
-    }
-    
-    .mobile-menu__link {
-        font-size: 22px;
-    }
-    
-    .mobile-menu__content {
-        padding: var(--spacing-xl) var(--spacing-md);
-    }
-}
+/************************************************* HOMEPAGE - INDEX **************************************************/
 
 /* ======================
-   HOMEPAGE HERO SECTION
-   ====================== */
+HOMEPAGE HERO SECTION
+====================== */
 
 .hero {
   padding: var(--spacing-3xl) 0 var(--spacing-5xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  right: -110px; 
+  top: 55%;
+  width: 600px;
+  height: 600px;
+  background-image: url('/assets/svg/submark-footer.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: translateY(-50%) rotate(-15deg);
+  z-index: 0;
+  opacity: 0.5;
+}
+
+
+.hero__title,
+.hero__subtitle,
+.hero__text {
+  position: relative;
+  z-index: 1;
 }
 
  .hero__text--home {
@@ -679,23 +641,23 @@ body.menu-open {
 
 .hero__signature {
   transform: rotate(-5deg);
-  margin-left: var(--spacing-3xl);
+  margin-left: var(--spacing-2xl);
   word-spacing: 50%;
   font-size: var(--text-lg);
   font-family: "Homemade Apple", cursive;
 }
 
 
+
 /* ======================
-   REVIEWS SECTION
-   ====================== */
+REVIEWS SECTION
+====================== */
 
 .reviews {
   padding: var(--spacing-3xl) 0;
   background-color: var(--breeze);
 }
 
-/* Header with titles, description and arrows */
 .reviews__header {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -705,7 +667,7 @@ body.menu-open {
 
 
 .reviews__title {
-    font-size: var(--text-7xl);
+    font-size: var(--text-5xl);
     
 }
 
@@ -729,9 +691,11 @@ body.menu-open {
   align-self: flex-start;
 }
 
+
+
 /* ======================
-   REVIEWS CAROUSEL
-   ====================== */
+REVIEWS CAROUSEL
+====================== */
 
 .reviews__carousel {
   overflow: hidden;
@@ -745,49 +709,15 @@ body.menu-open {
 .reviews__track {
   display: flex;
   gap: var(--spacing-lg);
-padding:var(--spacing-2xl) var(--container-padding);
+  padding:var(--spacing-2xl) var(--container-padding);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ======================
-   REVIEW CARDS
-   ====================== */
-.reviews__card {
-  min-width: calc(33.333% - var(--spacing-lg) * 2 / 3);
-  max-height: 320px; /* justér efter prototype */
-  padding: var(--spacing-xl);
-   background-color: var(--stone);
-  border-radius: var(--radius-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-    box-shadow: var(--shadow-md);
-}
-
-.bold {
-  font-weight: 500;
-}
-
-.reviews__stars {
-  display: flex;
-  gap: var(--spacing-xs);
-}
-
-.reviews__text {
-  font-size: var(--text-sm);
-  line-height: 1.6;
-}
-
-.reviews__author {
-  font-size: var(--text-xs);
-  opacity: 0.5;
-  margin: 0;
-}
 
 
 /* ======================
-   CAROUSEL ARROWS
-   ====================== */
+CAROUSEL ARROWS
+====================== */
 
 .reviews__arrow {
   width: 70px;
@@ -822,9 +752,44 @@ padding:var(--spacing-2xl) var(--container-padding);
   transform: none;
 }
 
+
+
 /* ======================
-   NEWSLETTER SECTION
-   ====================== */
+REVIEW CARDS
+====================== */
+.reviews__card {
+  min-width: calc(33.333% - var(--spacing-lg) * 2 / 3);
+  max-height: 320px; 
+  padding: var(--spacing-xl);
+   background-color: var(--stone);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+}
+
+.reviews__stars {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.reviews__text {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.reviews__author {
+  font-size: var(--text-xs);
+  opacity: 0.5;
+  margin: 0;
+}
+
+
+
+/* ======================
+NEWSLETTER SECTION
+====================== */
 
 .newsletter {
   padding: var(--spacing-5xl) 0;
@@ -836,13 +801,13 @@ padding:var(--spacing-2xl) var(--container-padding);
   margin: 0 auto;
   padding:  var(--spacing-3xl);
   background-color: var(--stone);
-  border-radius: var(--radius-lg);
+border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   text-align: center;
 }
 
 .newsletter__title {
-  font-size: var(--text-7xl);
+  font-size: var(--text-5xl);
   line-height: 0.9;
   margin-bottom: var(--spacing-2xl);
 }
@@ -867,9 +832,11 @@ padding-left: 100px;
 padding-right: 100px;
 }
 
+
+
 /* ======================
-   NEWSLETTER FORM
-   ====================== */
+NEWSLETTER FORM
+====================== */
 
 .newsletter__form {
   display: flex;
@@ -910,118 +877,32 @@ padding-right: 100px;
 }
 
 
-/* ======================
-   RESPONSIVE - TABLET
-   ====================== */
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .reviews__card {
-    min-width: calc(50% - var(--spacing-lg) / 2);
-  }
-  
-  .reviews__header {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
-  }
-}
+/************************************************* SPAOPLEVELSER (PRODUKTSIDEN) **************************************************/
 
 /* ======================
-   RESPONSIVE - MOBILE
-   ====================== */
-
-@media (max-width: 768px) {
-  /* Hero */
-  .hero {
-    padding: var(--spacing-2xl) 0;
-  }
-
-  .hero__text {
-    max-width: 100%;
-  }
-
-  /* Reviews */
-  .reviews__header {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
-  }
-  
-  .reviews__title,
-  .reviews__subtitle {
-    font-size: var(--text-4xl);
-  }
-
-  .reviews__meta {
-    gap: var(--spacing-lg);
-  }
-
-  .reviews__description {
-    max-width: 100%;
-  }
-
-  .reviews__arrows {
-    display: none; /* Hide arrows on mobile, use swipe instead */
-  }
-
-  .reviews__carousel {
-    margin-left: 0;
-    width: 100%;
-  }
-
-  .reviews__track-container {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-  }
-
-  .reviews__track-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
-
-  .reviews__track {
-    gap: var(--spacing-md);
-    padding: 0 var(--spacing-md);
-  }
-
-  .reviews__card {
-    min-width: 85%;
-    scroll-snap-align: center;
-  }
-
-  /* Newsletter */
-  .newsletter__container {
-    padding: var(--spacing-xl);
-  }
-
-  .newsletter__title {
-    font-size: var(--text-3xl);
-  }
-
-  .newsletter__form {
-    flex-direction: column;
-  }
-
-  .newsletter__button {
-    width: 100%;
-  }
-}
-
-
+KATEGORI-SEKTIONER
+====================== */
 
 .kategori__title {
   text-align: center;
-  font-size: var(--text-7xl);
+  font-size: var(--text-5xl);
   margin-top: var(--spacing-5xl);
   margin-bottom: var(--spacing-sm);
 }
 
 .kategori__intro {
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   text-align: center;
   line-height: 50px;
   margin-bottom: var(--spacing-3xl);
 }
+
+
+
+/* ======================
+FILTRERING
+====================== */
 
 .filter__label {
   font-size: var(--text-sm);
@@ -1036,6 +917,7 @@ padding-right: 100px;
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 .filter__btn {
@@ -1064,11 +946,17 @@ padding-right: 100px;
   color: var(--stone);
 }
 
+.filter__break {
+  flex-basis: 100%; 
+  height: 0; 
+  width: 0; 
+}
+
 /* CLEAR BUTTON STYLING */
 .filter__btn.clear-btn {
   border: 2px solid var(--mahogany);
   transition: all var(--transition-base);
-  /* Animation tilføjes via inline style i JavaScript */
+  margin-top: var(--spacing-sm);
 }
 
 .filter__btn.clear-btn:hover {
@@ -1088,9 +976,11 @@ padding-right: 100px;
   }
 }
 
+
+
 /* ======================
-   CARD GRID LAYOUT
-   ====================== */
+CARD GRID LAYOUT
+====================== */
 
 .card {
   width: 80%;
@@ -1111,11 +1001,36 @@ padding-right: 100px;
   gap: var(--spacing-lg);
   padding: var(--spacing-lg);
   text-decoration: none;
+   position: relative;
 }
 
-/* ======================
-   VENSTRE KOLONNE
-   ====================== */
+
+
+/* ==============================
+CARD BADGE - månedens tilbud
+============================== */
+
+.card__badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: var(--mahogany);
+  padding: 16px 30px;
+  border: solid 2px var(--mahogany);
+  border-radius: var(--radius-md);
+  font-family: var(--font-buvera);
+  font-size: var(--text-xs);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  z-index: 2;
+    white-space: nowrap;
+}
+
+
+
+/* =================================
+BEHANDLINGSCARD - VENSTRE KOLONNE
+================================= */
 
 .card__content {
   display: flex;
@@ -1124,7 +1039,7 @@ padding-right: 100px;
 }
 
 .card__title {
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   color: var(--terracotta);
   margin: 0;
   text-transform: uppercase;
@@ -1166,9 +1081,9 @@ padding-right: 100px;
   margin-top: var(--spacing-lg);
 }
 
-/* ======================
-   HØJRE KOLONNE
-   ====================== */
+/* ===============================
+BEHANDLINGSCARD - HØJRE KOLONNE
+=============================== */
 
 .card__aside {
   display: flex;
@@ -1185,56 +1100,70 @@ padding-right: 100px;
 }
 
 .card__price--old {
-  font-size: var(--text-5xl);
+  font-size: var(--text-3xl);
   opacity: 0.5;
   text-decoration: line-through;
 }
 
 .card__price--current {
-  font-size: var(--text-5xl);
+  font-size: var(--text-3xl);
 }
-
-/* .card__button {
-  padding: 12px 24px;
-  background-color: var(--terracotta);
-  color: var(--stone);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--text-base);
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  white-space: nowrap;
-} */
 
 .card__button:hover {
   background-color: #8a3621;
   transform: translateY(-1px);
 }
 
-/* ======================
-   BEHANDLING HERO
-   ====================== */
 
-  .behandling-hero{
-    padding-top: var(--spacing-2xl);
-  }
+/************************************************* BEHANDLINGSSIDE (SINGELVIEW) **************************************************/
+
+/* ======================
+BEHANDLING HERO
+====================== */
+
+.behandling-hero {
+  padding-top: var(--spacing-2xl);
+  position: relative;
+  overflow: visible;
+}
+
+/* Baggrundsbillede */
+.behandling-hero::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px; 
+  width: 600px;
+  height: 600px;
+  background-image: url('/assets/svg/bubbles-graphic.webp');
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -100;
+}
+
+
+.behandling-hero__container {
+  position: relative;
+  z-index: 1;
+}
 
 .behandling-hero__title {
-  font-size: var(--text-7xl);
+  font-size: var(--text-5xl);
   margin-bottom: var(--spacing-sm);
   text-transform: initial;
   line-height: 1.1;
 }
 
 .behandling-hero__intro {
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   margin-bottom: var(--spacing-3xl);
 }
 
+
+
 /* ======================
-   BEHANDLING CONTENT
-   ====================== */
+BEHANDLING CONTENT
+====================== */
 
 .behandling__container {
   display: grid;
@@ -1247,8 +1176,8 @@ padding-right: 100px;
 }
 
 /* ======================
-   SIDEBAR (VENSTRE)
-   ====================== */
+SIDEBAR (VENSTRE)
+====================== */
 
 .behandling-info {
   background-color: var(--stone);
@@ -1278,8 +1207,6 @@ padding-right: 100px;
 .behandling-info__block:last-of-type {
   padding-bottom: 0;
 }
-
-
 
 .behandling-info__heading {
   font-size: var(--text-lg);
@@ -1321,21 +1248,21 @@ padding-right: 100px;
 }
 
 .behandling-info__price--old {
-  font-size: var(--text-5xl);
+  font-size: var(--text-3xl);
   opacity: 0.5;
   text-decoration: line-through;
   margin-bottom: var(--spacing-sm);
 }
 
 .behandling-info__price {
-  font-size: var(--text-5xl);
+  font-size: var(--text-3xl);
   color: var(--mahogany);
   line-height: 1.2;
 }
 
 /* ======================
-   CTA BUTTONS CONTAINER
-   ====================== */
+CTA BUTTONS CONTAINER
+====================== */
 
 .behandling-cta-buttons {
   display: flex;
@@ -1346,22 +1273,11 @@ padding-right: 100px;
   margin-bottom: 0; /
 }
 
-/* Responsive - stabler på mobil */
-@media (max-width: 768px) {
-  .behandling-cta-buttons {
-    flex-direction: column;
-  }
-
-  .behandling-cta-buttons .behandling-info__cta {
-    width: 100%;
-  }
-}
-
 
 
 /* ======================
-   BESKRIVELSE (HØJRE)
-   ====================== */
+BESKRIVELSE (HØJRE)
+====================== */
 
 .behandling-description {
   max-width: 65ch;
@@ -1378,44 +1294,45 @@ padding-right: 100px;
 
 
 /* =========================
-   RELATED SECTION
+RELATED SECTION
 ========================= */
 
 .related__section {
-   padding: var(--container-padding);
+   padding: 0 var(--container-padding);
+   padding-bottom: var(--spacing-5xl);
 }
 
-/* TITLE */
 .related__title {
-  font-size: var(--text-7xl);
+  font-size: var(--text-5xl);
   line-height: 100px;
  letter-spacing: 0;
   margin-bottom: var(--spacing-xl);
 }
 
-/* GRID */
 .related__card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-xl);
 }
 
+
+
 /* ======================
-   RELATED CARDS
-   ====================== */
+RELATED CARDS
+====================== */
 
 .related__card {
   background-color: var(--stone);
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
   box-shadow: var(--shadow-md);
+  cursor: pointer;
 }
-
 
 .related__card--title {
   font-size: var(--text-xl);
@@ -1447,10 +1364,7 @@ padding-right: 100px;
 }
 
 
-
-/* ======================
-   FOOTER
-   ====================== */
+/************************************************* FOOTER **************************************************/
 
 .footer {
   padding: var(--spacing-2xl) 0 var(--spacing-2xl);
@@ -1463,9 +1377,11 @@ padding-right: 100px;
   align-items: start;
 }
 
+
+
 /* ======================
-   LOGO + COPYRIGHT
-   ====================== */
+LOGO + COPYRIGHT
+====================== */
 
 .footer__brand {
   display: flex;
@@ -1487,8 +1403,8 @@ padding-right: 100px;
 
 
 /* ======================
-   FOOTER SECTIONS
-   ====================== */
+FOOTER SECTIONS
+====================== */
 
 .footer__section {
   display: flex;
@@ -1497,15 +1413,15 @@ padding-right: 100px;
 }
 
 .footer__title {
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   margin-bottom: var(--spacing-xs);
   line-height: 1.2;
   letter-spacing: 0;
 }
 
 /* ======================
-   ÅBNINGSTIDER
-   ====================== */
+ÅBNINGSTIDER
+====================== */
 
 .footer__hours {
   display: grid;
@@ -1547,9 +1463,10 @@ padding-right: 100px;
 .terracotta {
   color: var(--terracotta);
 }
+
 /* ======================
-   KONTAKT
-   ====================== */
+KONTAKT
+====================== */
 
 .footer__contact {
   display: flex;
@@ -1557,7 +1474,6 @@ padding-right: 100px;
   gap: var(--spacing-md);
 }
 
-/* Telefon link (uden ikon) */
 .footer__contact-item {
   display: flex;
   align-items: center;
@@ -1573,7 +1489,6 @@ padding-right: 100px;
   color: var(--terracotta);
 }
 
-/* Email sektion med ét ikon til venstre */
 .footer__contact-email {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1583,7 +1498,7 @@ padding-right: 100px;
 
 .footer__contact-email svg {
   flex-shrink: 0;
-  margin-top: 2px; /* Alignerer med første linje tekst */
+  margin-top: 2px; 
 }
 
 .footer__contact-email-content {
@@ -1616,9 +1531,10 @@ padding-right: 100px;
 .footer__contact-link:hover {
   color: var(--terracotta);
 }
+
 /* ======================
-   ADRESSE
-   ====================== */
+ADRESSE
+====================== */
 
 .footer__address {
   display: flex;
@@ -1638,8 +1554,8 @@ padding-right: 100px;
 }
 
 /* ======================
-   SOCIAL MEDIA
-   ====================== */
+SOCIAL MEDIA
+====================== */
 
 .footer__newsletter {
   display: inline-flex;
@@ -1670,161 +1586,362 @@ padding-right: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 2px solid var(--mahogany); */
-  /* border-radius: 50%; */
   color: var(--mahogany);
   transition: all var(--transition-base);
 }
 
 .footer__social a:hover {
   transform: translateY(-2px);
-}
+
+
+
+}/* ======================================================================
+   RESPONSIVE BREAKPOINTS
+   =====================================================================
+   
 
 /* ======================
-   RESPONSIVE - TABLET
-   ====================== */
-
-@media (max-width: 1024px) {
-  .footer__container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-2xl);
-  }
-
-  .footer__brand {
-    grid-column: 1 / -1;
-    justify-self: center;
-    text-align: center;
-  }
-}
-
-/* ======================
-   RESPONSIVE - MOBILE
+   RESPONSIVE - MOBILE (max-width: 768px)
    ====================== */
 
 @media (max-width: 768px) {
-  .footer {
-    padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+  
+  /* ==================== GLOBAL ==================== */
+  
+  :root {
+    /* FONT SIZES - MOBILE */
+    --text-6xl: 100px;   /* Desktop: 250px */
+    --text-5xl: 48px;    /* Desktop: 100px */
+    --text-4xl: 40px;    /* Desktop: 64px */
+    --text-3xl: 32px;    /* Desktop: 45px */
+    --text-2xl: 28px;    /* Desktop: 40px */
+    --text-xl: 24px;     /* Desktop: 30px */
+    --text-lg: 22px;     /* Desktop: 28px */
+    --text-base: 15px;
+    --text-sm: 12px;
+    --text-xs: 10px;
+    
+    /* SPACING - MOBILE */
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --spacing-4xl: 96px;
+    --spacing-5xl: 128px;
+    
+    /* CONTAINER - MOBILE */
+    --container-padding: var(--spacing-lg);
+  }
+  
+  /* ==================== NAVIGATION ==================== */
+  
+  .navbar__menu,
+  .navbar__cta {
+    display: none;
+  }
+  
+  .navbar__mobile {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .navbar__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-right: 0;
+  }
+  
+
+  /* ==================== HOMEPAGE ==================== */
+  
+  /* Hero */
+  .hero {
+    padding: var(--spacing-2xl) 0;
   }
 
-  .footer__container {
+  .hero::before {
+  right: -50px; 
+  top: 30%;
+  width: 200px;
+  height: 200px;
+
+}
+  
+  .hero__title {
+    font-size: var(--text-6xl);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .hero__text {
+    max-width: 100%;
+  }
+  
+  /* Reviews */
+  .reviews {
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .reviews__header {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
   }
-
-  .footer__brand {
-    grid-column: 1;
+  
+  .reviews__title {
+    font-size: var(--text-5xl);
+  }
+  
+  .reviews__meta {
+    gap: var(--spacing-lg);
+  }
+  
+  .reviews__description {
+    max-width: 100%;
+  }
+  
+  .reviews__arrows {
+    display: none;
+  }
+  
+  .reviews__carousel {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .reviews__track-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .reviews__track-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .reviews__track {
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+  
+  .reviews__card {
+    min-width: 85%;
+    scroll-snap-align: center;
+  }
+  
+  /* Newsletter */
+  .newsletter {
+    padding: var(--spacing-xl);
+  }
+  
+  .newsletter__container {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+  }
+  
+  .newsletter__title {
+    font-size: var(--text-3xl);
+    line-height: 1.1;
   }
 
-  .footer__logo {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
+  .newsletter__highlight {
+    font-size: var(--text-md);
   }
-
-  .footer__title {
+  
+  .newsletter__text {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+  
+  .newsletter__form {
+    flex-direction: column;
+  }
+  
+  .newsletter__button {
+    width: 100%;
+  }
+  
+  /* ==================== SPAOPLEVELSER (PRODUKTSIDE) ==================== */
+  
+  /* Kategori */
+  .kategori__title {
+    font-size: var(--text-3xl);
+    margin-top: var(--spacing-3xl);
+  }
+  
+  .kategori__intro {
     font-size: var(--text-xl);
+    line-height: 1.4;
+  }
+  
+  /* Filter */
+  .filter__wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter__bar {
+    width: 100%;
+  }
+  
+ 
+  .filter__btn {
+    margin-right: 0;
+    margin-right: 0;
+    margin-top: var(--spacing-sm);
+    
   }
 
-  .footer__list li {
+  .card {
+    padding: var(--spacing-lg);
+  }
+
+.card__badge {
+  top: 0;
+  right: -10px;
+  font-size: 10px;
+  padding: 8px 14px;
+  border: none;
+
+}
+  
+
+  .card__link {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    padding: 0;
+  }
+  
+  .card__meta{
     font-size: var(--text-xs);
   }
-
-  .footer__social a {
-    width: 40px;
-    height: 40px;
+  .card__title {
+    font-size: var(--text-xl);
   }
-}
-
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .related__card-container {
-    grid-template-columns: 1fr;
+  
+  .card__aside {
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
   }
-}
-
-/* ======================
-   RESPONSIVE
-   ====================== */
-
-@media (max-width: 1024px) {
+  
+  .card__price--old,
+  .card__price--current {
+    font-size: var(--text-3xl);
+  }
+  
+  .card__button {
+    width: 100%;
+  }
+  
+  /* ==================== BEHANDLINGSSIDE ==================== */
+  
+  /* Hero */
+  .behandling-hero {
+    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+  }
+  
+  .behandling-hero::before {
+    width: 400px;
+    height: 400px;
+    top: -20px;
+    right: 0;
+  }
+  
+  .behandling-hero__title {
+    font-size: var(--text-5xl);
+    line-height: 1.1;
+  }
+  
+  .behandling-hero__intro {
+    font-size: var(--text-2xl);
+  }
+  
+  /* Content */
+  .behandling {
+    padding: 0 0 var(--spacing-3xl);
+  }
+  
   .behandling__container {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
   }
-
-  .behandling-info {
-    position: static;
-  }
-}
-
-@media (max-width: 768px) {
-  .behandling-hero {
-    padding: var(--spacing-2xl) 0 var(--spacing-lg);
-  }
-
-  .behandling-hero__title {
-    font-size: var(--text-6xl);
-  }
-
-  .behandling-hero__subtitle {
-    font-size: var(--text-lg);
-  }
-
-  .behandling-hero__intro {
-    font-size: var(--text-xl);
-  }
-
-  .behandling {
-    padding: 0 0 var(--spacing-3xl);
-  }
+  
+.behandling-description{line-height: 1.5;}
 
   .behandling-info {
     padding: var(--spacing-lg);
+    position: static;
   }
-
+  
+  .behandling-info__price--old,
   .behandling-info__price {
-    font-size: var(--text-4xl);
+    font-size: var(--text-3xl);
   }
-}
-
-/* ======================
-   RESPONSIVE
-   ====================== */
-
-@media (max-width: 768px) {
-  .card__link {
+  
+  .behandling-cta-buttons {
+    flex-direction: column;
+  }
+  
+  .behandling-cta-buttons .behandling-info__cta {
+    width: 100%;
+  }
+  
+  /* Related */
+  .related__section {
+    padding: 0 var(--container-padding);
+    padding-bottom: var(--spacing-3xl);
+  }
+  
+  .related__title {
+    font-size: var(--text-5xl);
+    line-height: 1.2;
+  }
+  
+  .related__card-container {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
   }
-
-  .card__aside {
-    align-items: flex-start;
-    text-align: left;
-    min-width: auto;
-    width: 100%;
-  }
-
-  .card__button {
-    width: 100%;
-  }
+  /* ==================== FOOTER ==================== */
+  
+.footer {
+  padding: var(--spacing-3xl) 0 var(--spacing-2xl);
 }
 
-/* ======================
-   RESPONSIVE
-   ====================== */
-
-@media (max-width: 768px) {
-  :root {
-    --text-8xl: 135px;
-    --text-7xl: 48px;
-    --text-6xl: 40px;
-    --text-5xl: 36px;
-    --text-4xl: 32px;
-    --text-3xl: 28px;
-
-    --spacing-xl: 32px;
-    --spacing-2xl: 48px;
-    --spacing-3xl: 64px;
-  }
+.footer__container {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
 }
+
+/* Centrerer KUN logo og copyright */
+.footer__brand {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer__logo {
+  margin: 0 auto;
+}
+
+.footer__logo img {
+  width: 120px;
+  height: 120px;
+}
+
+.footer__copyright {
+  text-align: center;
+}
+
+.footer__title {
+  font-size: var(--text-2xl);
+}
+
+.footer__social a {
+  width: 40px;
+  height: 40px;
+}}

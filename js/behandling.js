@@ -53,7 +53,7 @@ function renderRelatedBehandlinger(behandlinger) {
   container.innerHTML = behandlinger
     .map(
       (b) => `
-      <div class="related__card">
+      <div class="related__card" onclick="window.location.href='behandling.html?slug=${b.slug}'">
         <h4 class="related__card--title font-buvera">${b.navn}</h4>
 
         <p class="related__card--text">
@@ -64,7 +64,7 @@ function renderRelatedBehandlinger(behandlinger) {
           ${b.varighed} • ${b.pris},- pr. person
         </p>
 
-        <a href="behandling.html?slug=${b.slug}" class="button button--secondary button--small">
+        <a href="https://www.sofiebadet.dk/book-tid" class="button button--secondary button--small" onclick="event.stopPropagation()">
           Book tid
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
             viewBox="0 0 24 24" fill="none">

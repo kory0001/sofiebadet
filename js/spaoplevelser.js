@@ -1,14 +1,13 @@
 // ==========================================
 // STATE
 // ==========================================
-
 let allBehandlinger = [];
 let activeFilters = [];
+let showTilbudOnly = false; // ← NY: Track om "Tilbud" filter er aktivt
 
 // ==========================================
 // KATEGORIER
 // ==========================================
-
 const KATEGORIER = [
   { navn: "Hammam", slug: "hammam" },
   { navn: "Kurbad", slug: "kurbad" },
@@ -21,7 +20,6 @@ const KATEGORIER = [
 // ==========================================
 // STEP 1: FETCH BEHANDLINGER FRA SUPABASE
 // ==========================================
-
 async function getBehandlinger() {
   const response = await fetch(`${API_BASE}/behandlinger?order=sortering.asc`, {
     method: "GET",
@@ -50,11 +48,20 @@ async function getBehandlinger() {
 }
 
 // ==========================================
-// STEP 2: RENDER FILTER BUTTONS
+// STEP 2: RENDER FILTER BUTTONS - OPDATERET
 // ==========================================
-
 function renderFilterButtons(shouldAnimateClear = false) {
   const container = document.getElementById("filterButtons");
+
+  // Tilbud knap
+  const tilbudBtn = `
+    <button 
+      class="filter__btn font-buvera ${showTilbudOnly ? "active" : ""}" 
+      onclick="toggleTilbud()"
+    >
+      Tilbud
+    </button>
+  `;
 
   const buttonsHTML = KATEGORIER.map(
     (kat) => `
@@ -68,8 +75,9 @@ function renderFilterButtons(shouldAnimateClear = false) {
   ).join("");
 
   const clearBtn =
-    activeFilters.length > 0
+    activeFilters.length > 0 || showTilbudOnly
       ? `
+    <div class="filter__break"></div>
     <button 
       class="filter__btn clear-btn font-buvera" 
       id="clearButton" 
@@ -81,16 +89,15 @@ function renderFilterButtons(shouldAnimateClear = false) {
   `
       : "";
 
-  container.innerHTML = buttonsHTML + clearBtn;
+  container.innerHTML = tilbudBtn + buttonsHTML + clearBtn;
 }
 
 // ==========================================
 // STEP 3: TOGGLE FILTER
 // ==========================================
-
 function toggleFilter(kategoriSlug) {
   // Gem om clear button var synlig FØR vi ændrer noget
-  const hadActiveFilters = activeFilters.length > 0;
+  const hadActiveFilters = activeFilters.length > 0 || showTilbudOnly;
 
   const index = activeFilters.indexOf(kategoriSlug);
 
@@ -101,7 +108,23 @@ function toggleFilter(kategoriSlug) {
   }
 
   // Skal vi animere? Kun hvis der IKKE var aktive filtre før
-  const shouldAnimate = !hadActiveFilters && activeFilters.length > 0;
+  const shouldAnimate = !hadActiveFilters && (activeFilters.length > 0 || showTilbudOnly);
+
+  renderFilterButtons(shouldAnimate);
+  renderBehandlinger();
+}
+
+// ==========================================
+// STEP 3B: TOGGLE TILBUD - NY FUNKTION
+// ==========================================
+function toggleTilbud() {
+  // Gem om clear button var synlig FØR vi ændrer noget
+  const hadActiveFilters = activeFilters.length > 0 || showTilbudOnly;
+
+  showTilbudOnly = !showTilbudOnly;
+
+  // Skal vi animere? Kun hvis der IKKE var aktive filtre før
+  const shouldAnimate = !hadActiveFilters && (activeFilters.length > 0 || showTilbudOnly);
 
   renderFilterButtons(shouldAnimate);
   renderBehandlinger();
@@ -109,18 +132,29 @@ function toggleFilter(kategoriSlug) {
 
 function clearFilters() {
   activeFilters = [];
-  renderFilterButtons(false); // Ingen animation når vi clearer
+  showTilbudOnly = false; // ← Reset også tilbud filter
+  renderFilterButtons(false);
   renderBehandlinger();
 }
 
 // ==========================================
-// STEP 4: RENDER BEHANDLINGER
+// STEP 4: RENDER BEHANDLINGER - OPDATERET
 // ==========================================
-
 function renderBehandlinger() {
   const container = document.getElementById("behandlingerContainer");
 
-  const filtered = activeFilters.length > 0 ? allBehandlinger.filter((b) => activeFilters.includes(b.kategoriSlug)) : allBehandlinger;
+  // Filtrer behandlinger
+  let filtered = allBehandlinger;
+
+  // Først: Filtrer på tilbud hvis aktivt
+  if (showTilbudOnly) {
+    filtered = filtered.filter((b) => b.prisOriginal); // Kun behandlinger med pris_original
+  }
+
+  // Derefter: Filtrer på kategorier hvis aktive
+  if (activeFilters.length > 0) {
+    filtered = filtered.filter((b) => activeFilters.includes(b.kategoriSlug));
+  }
 
   const grouped = filtered.reduce((acc, behandling) => {
     const kat = behandling.kategori;
@@ -147,20 +181,18 @@ function renderBehandlinger() {
   }
 
   if (html === "") {
-    html = '<p class="no-results font-hedvig">Ingen behandlinger fundet i denne kategori</p>';
+    html = '<p class="no-results font-hedvig">Ingen behandlinger fundet</p>';
   }
 
   container.innerHTML = html;
-}
-
-// ==========================================
+} // ==========================================
 // STEP 5: CREATE BEHANDLING CARD
 // ==========================================
-
 function createCard(behandling) {
   return `
     <article class="card ${behandling.kundefavorit ? "card--featured" : ""}">
       <a href="behandling.html?slug=${behandling.slug}" class="card__link">
+        ${behandling.prisOriginal ? '<span class="card__badge">Månedens behandling - 20%</span>' : ""}
         
         <div class="card__content">
           <h4 class="card__title font-buvera">${behandling.navn}</h4>
@@ -204,7 +236,6 @@ function createCard(behandling) {
 // ==========================================
 // STEP 6: INIT
 // ==========================================
-
 async function init() {
   try {
     document.getElementById("behandlingerContainer").innerHTML = '<div class="loading font-hedvig">Henter behandlinger...</div>';
