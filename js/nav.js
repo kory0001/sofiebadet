@@ -5,7 +5,7 @@ class Navigation {
   constructor() {
     this.burger = document.querySelector(".navbar__burger");
     this.mobileMenu = document.querySelector(".mobile-menu");
-    this.languageToggle = document.querySelector(".navbar__language-toggle"); // ← RETTET
+    this.languageToggle = document.querySelector(".navbar__language-toggle");
     this.languageContainer = document.querySelector(".navbar__language");
     this.body = document.body;
     this.init();
@@ -67,12 +67,10 @@ class Navigation {
   }
 
   changeLanguage(lang) {
-    console.log(`Language changed to: ${lang}`); // ← RETTET
+    console.log(`Language changed to: ${lang}`);
 
-    // Update button text
     this.languageToggle.childNodes[0].textContent = lang.toUpperCase() + " ";
 
-    // Close dropdown
     this.languageContainer.classList.remove("active");
   }
 }

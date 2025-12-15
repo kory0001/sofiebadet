@@ -1,4 +1,4 @@
-// Reviews Carousel
+// ANMELDELSER KARRUSEL-SEKTION
 class ReviewsCarousel {
   constructor() {
     this.track = document.querySelector(".reviews__track");
@@ -44,7 +44,6 @@ class ReviewsCarousel {
       this.cardsToShow = newCardsToShow;
       this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
 
-      // Adjust current index if needed
       if (this.currentIndex > this.maxIndex) {
         this.currentIndex = this.maxIndex;
       }
@@ -70,16 +69,13 @@ class ReviewsCarousel {
   updateCarousel() {
     if (!this.track || this.cards.length === 0) return;
 
-    // Calculate card width including gap
     const firstCard = this.cards[0];
     const cardWidth = firstCard.offsetWidth;
     const gap = parseInt(getComputedStyle(this.track).gap) || 0;
     const moveAmount = (cardWidth + gap) * this.currentIndex;
 
-    // Move the track
     this.track.style.transform = `translateX(-${moveAmount}px)`;
 
-    // Update button states
     this.updateButtons();
   }
 
@@ -117,15 +113,13 @@ class ReviewsCarousel {
   }
 
   handleSwipe(startX, endX) {
-    const swipeThreshold = 50; // Minimum swipe distance
+    const swipeThreshold = 50;
     const diff = startX - endX;
 
     if (Math.abs(diff) > swipeThreshold) {
       if (diff > 0) {
-        // Swiped left - go to next
         this.next();
       } else {
-        // Swiped right - go to prev
         this.prev();
       }
     }

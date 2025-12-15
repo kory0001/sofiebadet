@@ -71,7 +71,7 @@ function renderRelatedBehandlinger(behandlinger) {
           ${b.varighed} • ${b.pris},- pr. person
         </p>
 
-        <a href="https://www.sofiebadet.dk/book-tid" class="button button--secondary button--small" onclick="event.stopPropagation()">
+        <a href="https://app.acuityscheduling.com/schedule/bd7f9e62" class="button button--secondary button--small" onclick="event.stopPropagation()">
           Book tid
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
             viewBox="0 0 24 24" fill="none">
@@ -99,7 +99,7 @@ async function renderBehandling() {
     document.getElementById("heroTitle").textContent = behandling.navn;
     document.getElementById("introText").textContent = behandling.kort_intro_tekst || "";
 
-    // Kundefavorit
+    // KUNDEFARVORIT
     if (behandling.kundefavorit) {
       document.getElementById("kundefavoritBadge").style.display = "flex";
     }

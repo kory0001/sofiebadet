@@ -10,8 +10,7 @@ const API_BASE = `${SUPABASE_URL}/rest/v1`;
 // ==========================================
 let allBehandlinger = [];
 let activeFilters = [];
-let showTilbudOnly = false; // ← NY: Track om "Tilbud" filter er aktivt
-
+let showTilbudOnly = false;
 // ==========================================
 // KATEGORIER
 // ==========================================
@@ -103,7 +102,6 @@ function renderFilterButtons(shouldAnimateClear = false) {
 // STEP 3: TOGGLE FILTER
 // ==========================================
 function toggleFilter(kategoriSlug) {
-  // Gem om clear button var synlig FØR vi ændrer noget
   const hadActiveFilters = activeFilters.length > 0 || showTilbudOnly;
 
   const index = activeFilters.indexOf(kategoriSlug);
@@ -114,7 +112,6 @@ function toggleFilter(kategoriSlug) {
     activeFilters.push(kategoriSlug);
   }
 
-  // Skal vi animere? Kun hvis der IKKE var aktive filtre før
   const shouldAnimate = !hadActiveFilters && (activeFilters.length > 0 || showTilbudOnly);
 
   renderFilterButtons(shouldAnimate);
@@ -125,12 +122,10 @@ function toggleFilter(kategoriSlug) {
 // STEP 3B: TOGGLE TILBUD - NY FUNKTION
 // ==========================================
 function toggleTilbud() {
-  // Gem om clear button var synlig FØR vi ændrer noget
   const hadActiveFilters = activeFilters.length > 0 || showTilbudOnly;
 
   showTilbudOnly = !showTilbudOnly;
 
-  // Skal vi animere? Kun hvis der IKKE var aktive filtre før
   const shouldAnimate = !hadActiveFilters && (activeFilters.length > 0 || showTilbudOnly);
 
   renderFilterButtons(shouldAnimate);
@@ -139,7 +134,7 @@ function toggleTilbud() {
 
 function clearFilters() {
   activeFilters = [];
-  showTilbudOnly = false; // ← Reset også tilbud filter
+  showTilbudOnly = false;
   renderFilterButtons(false);
   renderBehandlinger();
 }
@@ -153,12 +148,12 @@ function renderBehandlinger() {
   // Filtrer behandlinger
   let filtered = allBehandlinger;
 
-  // Først: Filtrer på tilbud hvis aktivt
+  // 01: Filtrer på tilbud hvis aktivt
   if (showTilbudOnly) {
-    filtered = filtered.filter((b) => b.prisOriginal); // Kun behandlinger med pris_original
+    filtered = filtered.filter((b) => b.prisOriginal);
   }
 
-  // Derefter: Filtrer på kategorier hvis aktive
+  // 02: Filtrer på kategorier hvis aktive
   if (activeFilters.length > 0) {
     filtered = filtered.filter((b) => activeFilters.includes(b.kategoriSlug));
   }

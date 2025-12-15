@@ -1124,7 +1124,7 @@ BEHANDLING HERO
 .behandling-hero {
   padding-top: var(--spacing-2xl);
   position: relative;
-  overflow: visible;
+overflow: visible;
 }
 
 /* Baggrundsbillede */
@@ -1132,7 +1132,7 @@ BEHANDLING HERO
   content: '';
   position: absolute;
   top: -50px;
-  right: -50px; 
+  right: 0px; 
   width: 600px;
   height: 600px;
   background-image: url('/assets/svg/bubbles-graphic.webp');
@@ -1619,7 +1619,7 @@ SOCIAL MEDIA
 /* Store titler - vifte effekt linje for linje */
 .hero__title.fade-in,
 .kategori__title.fade-in {
-  overflow: hidden;
+    overflow: visible;
   display: block;
 }
 
