@@ -81,12 +81,3 @@ class Navigation {
 document.addEventListener("DOMContentLoaded", () => {
   new Navigation();
 });
-
-window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    navbar.style.boxShadow = "var(--shadow-md)";
-  } else {
-    navbar.style.boxShadow = "none";
-  }
-});

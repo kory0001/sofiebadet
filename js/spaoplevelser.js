@@ -3,7 +3,7 @@
 // ==========================================
 
 let allBehandlinger = [];
-let activeFilter = null;
+let activeFilters = [];
 
 // ==========================================
 // KATEGORIER
@@ -34,7 +34,6 @@ async function getBehandlinger() {
 
   const data = await response.json();
 
-  // Map til det format vi bruger
   return data.map((b) => ({
     slug: b.slug,
     navn: b.navn,
@@ -54,40 +53,63 @@ async function getBehandlinger() {
 // STEP 2: RENDER FILTER BUTTONS
 // ==========================================
 
-function renderFilterButtons() {
+function renderFilterButtons(shouldAnimateClear = false) {
   const container = document.getElementById("filterButtons");
 
-  // Generer knapper for hver kategori
   const buttonsHTML = KATEGORIER.map(
     (kat) => `
     <button 
-      class="filter__btn font-buvera ${activeFilter === kat.slug ? "active" : ""}" 
-      onclick="setFilter('${kat.slug}')"
+      class="filter__btn font-buvera ${activeFilters.includes(kat.slug) ? "active" : ""}" 
+      onclick="toggleFilter('${kat.slug}')"
     >
       ${kat.navn}
     </button>
   `
   ).join("");
 
-  // Tilføj "Ryd alle" knap hvis filter er aktiv
-  const clearBtn = activeFilter
-    ? `
-    <button class="filter__btn clear-btn font-buvera" onclick="setFilter(null)">
+  const clearBtn =
+    activeFilters.length > 0
+      ? `
+    <button 
+      class="filter__btn clear-btn font-buvera" 
+      id="clearButton" 
+      ${shouldAnimateClear ? 'style="animation: fadeIn 0.3s ease-in-out;"' : ""}
+      onclick="clearFilters()"
+    >
       Ryd alle <span>×</span>
     </button>
   `
-    : "";
+      : "";
 
   container.innerHTML = buttonsHTML + clearBtn;
 }
 
 // ==========================================
-// STEP 3: SET FILTER
+// STEP 3: TOGGLE FILTER
 // ==========================================
 
-function setFilter(kategoriSlug) {
-  activeFilter = kategoriSlug;
-  renderFilterButtons();
+function toggleFilter(kategoriSlug) {
+  // Gem om clear button var synlig FØR vi ændrer noget
+  const hadActiveFilters = activeFilters.length > 0;
+
+  const index = activeFilters.indexOf(kategoriSlug);
+
+  if (index > -1) {
+    activeFilters.splice(index, 1);
+  } else {
+    activeFilters.push(kategoriSlug);
+  }
+
+  // Skal vi animere? Kun hvis der IKKE var aktive filtre før
+  const shouldAnimate = !hadActiveFilters && activeFilters.length > 0;
+
+  renderFilterButtons(shouldAnimate);
+  renderBehandlinger();
+}
+
+function clearFilters() {
+  activeFilters = [];
+  renderFilterButtons(false); // Ingen animation når vi clearer
   renderBehandlinger();
 }
 
@@ -98,10 +120,8 @@ function setFilter(kategoriSlug) {
 function renderBehandlinger() {
   const container = document.getElementById("behandlingerContainer");
 
-  // Filtrer behandlinger hvis aktiv filter
-  const filtered = activeFilter ? allBehandlinger.filter((b) => b.kategoriSlug === activeFilter) : allBehandlinger;
+  const filtered = activeFilters.length > 0 ? allBehandlinger.filter((b) => activeFilters.includes(b.kategoriSlug)) : allBehandlinger;
 
-  // Gruppér efter kategori
   const grouped = filtered.reduce((acc, behandling) => {
     const kat = behandling.kategori;
     if (!acc[kat]) acc[kat] = [];
@@ -109,25 +129,16 @@ function renderBehandlinger() {
     return acc;
   }, {});
 
-  // Byg HTML
   let html = "";
 
   for (const [kategori, behandlinger] of Object.entries(grouped)) {
     html += `
       <div class="kategori-section">
-        <!-- Kategori header -->
         <div class="kategori__header">
           <h3 class="kategori__title font-editorial">${kategori}</h3>
-          ${
-            behandlinger[0].introTekst
-              ? `
-            <p class="kategori__intro font-editorial-italic">${behandlinger[0].introTekst}</p>
-          `
-              : ""
-          }
+          ${behandlinger[0].introTekst ? `<p class="kategori__intro font-editorial-italic">${behandlinger[0].introTekst}</p>` : ""}
         </div>
         
-        <!-- Grid af behandlinger -->
         <div class="behandlinger-grid">
           ${behandlinger.map((b) => createCard(b)).join("")}
         </div>
@@ -135,7 +146,6 @@ function renderBehandlinger() {
     `;
   }
 
-  // Vis "ingen resultater" hvis tomt
   if (html === "") {
     html = '<p class="no-results font-hedvig">Ingen behandlinger fundet i denne kategori</p>';
   }
@@ -152,20 +162,17 @@ function createCard(behandling) {
     <article class="card ${behandling.kundefavorit ? "card--featured" : ""}">
       <a href="behandling.html?slug=${behandling.slug}" class="card__link">
         
-        <!-- VENSTRE KOLONNE: Tekst -->
         <div class="card__content">
           <h4 class="card__title font-buvera">${behandling.navn}</h4>
-         <p class="card__description font-hedvig">
-  ${behandling.kortBeskrivelse} 
-  <span class="card__read-more font-buvera">
-    Læs mere 
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <path d="M16.1379 13.4416H0V11.5584H16.1379C18.3024 11.5584 19.4483 12.1753 21.3263 12.1753V12.0779C17.634 10.3896 16.2653 8.50649 15.0239 6.55844L16.8382 5C18.6525 8.40909 20.5623 10.3247 24 11.9156V13.0519C20.5623 14.6429 18.6525 16.5909 16.8382 20L15.0239 18.4091C16.2653 16.4935 17.634 14.6104 21.3263 12.9221V12.8247C19.4483 12.8247 18.2706 13.4416 16.1379 13.4416Z" fill="#321600"/>
-    </svg>
-  </span>
-</p>
-          
-   
+          <p class="card__description font-hedvig">
+            ${behandling.kortBeskrivelse} 
+            <span class="card__read-more font-buvera">
+              Læs mere 
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M16.1379 13.4416H0V11.5584H16.1379C18.3024 11.5584 19.4483 12.1753 21.3263 12.1753V12.0779C17.634 10.3896 16.2653 8.50649 15.0239 6.55844L16.8382 5C18.6525 8.40909 20.5623 10.3247 24 11.9156V13.0519C20.5623 14.6429 18.6525 16.5909 16.8382 20L15.0239 18.4091C16.2653 16.4935 17.634 14.6104 21.3263 12.9221V12.8247C19.4483 12.8247 18.2706 13.4416 16.1379 13.4416Z" fill="#321600"/>
+              </svg>
+            </span>
+          </p>
           
           <div class="card__meta font-hedvig">
             <span>${behandling.varighed}</span>
@@ -174,47 +181,35 @@ function createCard(behandling) {
           </div>
         </div>
         
-        <!-- HØJRE KOLONNE: Pris + Knap -->
         <div class="card__aside">
           <div class="card__pricing">
-            ${
-              behandling.prisOriginal
-                ? `
-              <span class="card__price card__price--old font-editorial-italic">${behandling.prisOriginal},- pr. person</span>
-            `
-                : ""
-            }
+            ${behandling.prisOriginal ? `<span class="card__price card__price--old font-editorial-italic">${behandling.prisOriginal},- pr. person</span>` : ""}
             <span class="card__price card__price--current font-editorial-italic">${behandling.pris},- pr. person</span>
           </div>
           
           <button class="button button--primary">
-            Book tid  <span><svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
-  <path d="M11.154 5.72H0V4.444H11.154C12.65 4.444 13.442 4.862 14.74 4.862V4.796C12.188 3.652 11.242 2.376 10.384 1.056L11.638 0C12.892 2.31 14.212 3.608 16.588 4.686V5.456C14.212 6.534 12.892 7.854 11.638 10.164L10.384 9.086C11.242 7.788 12.188 6.512 14.74 5.368V5.302C13.442 5.302 12.628 5.72 11.154 5.72Z" fill="#F6F6EC"/>
-</svg>
-          </span>
+            Book tid  
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
+                <path d="M11.154 5.72H0V4.444H11.154C12.65 4.444 13.442 4.862 14.74 4.862V4.796C12.188 3.652 11.242 2.376 10.384 1.056L11.638 0C12.892 2.31 14.212 3.608 16.588 4.686V5.456C14.212 6.534 12.892 7.854 11.638 10.164L10.384 9.086C11.242 7.788 12.188 6.512 14.74 5.368V5.302C13.442 5.302 12.628 5.72 11.154 5.72Z" fill="#F6F6EC"/>
+              </svg>
+            </span>
           </button>
         </div>
-        
-        
       </a>
     </article>
   `;
 }
 
 // ==========================================
-// STEP 6: INIT - KØR NÅR SIDEN LOADER
+// STEP 6: INIT
 // ==========================================
 
 async function init() {
   try {
-    // Vis loading
     document.getElementById("behandlingerContainer").innerHTML = '<div class="loading font-hedvig">Henter behandlinger...</div>';
-
-    // Hent data
     allBehandlinger = await getBehandlinger();
-
-    // Render
-    renderFilterButtons();
+    renderFilterButtons(false);
     renderBehandlinger();
   } catch (error) {
     console.error("Fejl ved hentning:", error);
@@ -222,7 +217,6 @@ async function init() {
   }
 }
 
-// Kør init når DOM er klar
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", init);
 } else {

@@ -214,7 +214,6 @@ body {
   font-size: var(--text-base);
   line-height: 1.5;
   max-width: 50%;
-  margin-bottom: var(--spacing-3xl);
 }
 
 /* ======================
@@ -308,7 +307,6 @@ body {
     height: 80px;
     background: var(--breeze);
     z-index: 1000;
-   transition: box-shadow 0.4s ease-in-out;
 }
 
 .navbar__container {
@@ -906,8 +904,8 @@ padding-right: 100px;
 }
 
 .newsletter__disclaimer {
-  font-size: 12px;
-  opacity: 0.6;
+  font-size: var(--text-sm);
+  opacity: 0.5;
   margin: 0;
 }
 
@@ -1031,7 +1029,7 @@ padding-right: 100px;
   align-items: center;
   gap: var(--spacing-xs);
   color: var(--mahogany);
-  opacity: 50%;
+  opacity: 0.5;
 }
 
 .filter__bar {
@@ -1040,24 +1038,54 @@ padding-right: 100px;
   gap: var(--spacing-md);
 }
 
-
 .filter__btn {
-  margin: var(--spacing-xs);
+  margin-left: var(--spacing-xs);
+  margin-right: var(--spacing-xs);
   padding: 8px 18px;
   border-radius: var(--radius-md);
-  border: 1.5px solid var(--mahogany);
+  border: 2px solid var(--mahogany);
   background-color: transparent;
   color: var(--mahogany);
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 200ms ease;
+  transition: all var(--transition-base);
   cursor: pointer;
 }
 
 .filter__btn:hover {
   background-color: rgba(50, 22, 0, 0.05);
-  padding: 8px 20px;
+  transform: translateY(-2px);
+}
+
+/* ACTIVE STATE */
+.filter__btn.active {
+  background-color: var(--mahogany);
+  color: var(--stone);
+}
+
+/* CLEAR BUTTON STYLING */
+.filter__btn.clear-btn {
+  border: 2px solid var(--mahogany);
+  transition: all var(--transition-base);
+  /* Animation tilføjes via inline style i JavaScript */
+}
+
+.filter__btn.clear-btn:hover {
+  background-color: rgba(50, 22, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* FADE IN ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ======================
@@ -1188,6 +1216,9 @@ padding-right: 100px;
    BEHANDLING HERO
    ====================== */
 
+  .behandling-hero{
+    padding-top: var(--spacing-2xl);
+  }
 
 .behandling-hero__title {
   font-size: var(--text-7xl);
@@ -1198,7 +1229,7 @@ padding-right: 100px;
 
 .behandling-hero__intro {
   font-size: var(--text-2xl);
-  margin-bottom: var(--spacing-4xl);
+  margin-bottom: var(--spacing-3xl);
 }
 
 /* ======================
@@ -1241,7 +1272,7 @@ padding-right: 100px;
 }
 
 .behandling-info__block {
-  padding-bottom: var(--spacing-2xl);
+  padding-bottom: var(--spacing-xl);
 }
 
 .behandling-info__block:last-of-type {
@@ -1258,6 +1289,7 @@ padding-right: 100px;
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  line-height: 1.6;
 }
 
 .behandling-info__text {
@@ -1308,7 +1340,6 @@ padding-right: 100px;
 .behandling-cta-buttons {
   display: flex;
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
 }
 
 .behandling-cta-buttons .behandling-info__cta {
@@ -1360,7 +1391,6 @@ padding-right: 100px;
   line-height: 100px;
  letter-spacing: 0;
   margin-bottom: var(--spacing-xl);
-
 }
 
 /* GRID */
@@ -1370,7 +1400,6 @@ padding-right: 100px;
   gap: var(--spacing-xl);
 }
 
-/* CARD */
 /* ======================
    RELATED CARDS
    ====================== */
@@ -1384,9 +1413,8 @@ padding-right: 100px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-    box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md);
 }
-
 
 
 .related__card--title {
@@ -1398,28 +1426,25 @@ padding-right: 100px;
 }
 
 .related__card--text {
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-family: var(--font-hedvig);
   color: var(--mahogany);
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
-  flex-grow: 1; /* Fylder plads så knap er i bunden */
+  flex-grow: 1; 
 }
 
 .related__card--meta {
   font-size: var(--text-sm);
   font-family: var(--font-hedvig);
   color: var(--mahogany);
-  opacity: 0.7;
-  margin: 0;
+  opacity: 0.5;
 }
 
-/* KNAP I CARD - IKKE FULD BREDDE */
 .related__card .button {
-  align-self: flex-start; /* ← VIGTIG: Gør knappen auto-width */
+  align-self: flex-start;
   margin-top: var(--spacing-sm);
 }
-
 
 
 
@@ -1428,7 +1453,7 @@ padding-right: 100px;
    ====================== */
 
 .footer {
-  padding: var(--spacing-5xl) 0 var(--spacing-3xl);
+  padding: var(--spacing-2xl) 0 var(--spacing-2xl);
 }
 
 .footer__container {
@@ -1449,20 +1474,17 @@ padding-right: 100px;
   align-self: stretch;
 }
 
-.footer__logo svg {
-  width: 100%;
-  height: 100%;
+.footer__logo img {
+  width: 90%;
+  height: 90%;
+  transform: rotate(-13.5deg);
 }
 
 .footer__copyright p {
-  font-size: var(--text-base);
-  line-height: 1.5;
-  margin: 0;
+  font-size: var(--text-sm);
+  margin-top: var(--spacing-xs);
 }
 
-.footer__copyright {
-  margin-top: auto; 
-}
 
 /* ======================
    FOOTER SECTIONS
@@ -1488,7 +1510,6 @@ padding-right: 100px;
 .footer__hours {
   display: grid;
   grid-template-columns: auto auto; 
-  gap: var(--spacing-md); 
   font-family: var(--font-hedvig);
 }
 
