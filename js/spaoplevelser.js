@@ -6,7 +6,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const API_BASE = `${SUPABASE_URL}/rest/v1`;
 
 // ==========================================
-// STATE
+// Globale variabler til at holde styr på data og filtre
 // ==========================================
 let allBehandlinger = [];
 let activeFilters = [];
@@ -119,7 +119,7 @@ function toggleFilter(kategoriSlug) {
 }
 
 // ==========================================
-// STEP 3B: TOGGLE TILBUD - NY FUNKTION
+// STEP 3B: TOGGLE TILBUD
 // ==========================================
 function toggleTilbud() {
   const hadActiveFilters = activeFilters.length > 0 || showTilbudOnly;
@@ -140,7 +140,7 @@ function clearFilters() {
 }
 
 // ==========================================
-// STEP 4: RENDER BEHANDLINGER - OPDATERET
+// STEP 4: RENDER BEHANDLINGER
 // ==========================================
 function renderBehandlinger() {
   const container = document.getElementById("behandlingerContainer");
